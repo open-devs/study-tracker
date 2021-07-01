@@ -788,6 +788,11 @@ clone-response@^1.0.2:
   dependencies:
     mimic-response "^1.0.0"
 
+close-with-grace@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/close-with-grace/-/close-with-grace-1.1.0.tgz#91a48cf2019b5ae6e67b0255a32abcfd9bbca233"
+  integrity sha512-6cCp71Y5tKw1o9sGVBOa9OwY4vJ+YoLpFcWiTt9YCBhYlcQi0z68EiiN9mJ6/401Za6TZ5YOZg012IHHZt15lw==
+
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
@@ -1011,6 +1016,11 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
+dotenv@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.npmjs.org/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
+  integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
+
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.npmjs.org/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -1164,25 +1174,10 @@ fastify-autoload@^3.3.1:
     pkg-up "^3.1.0"
     semver "^7.3.2"
 
-fastify-bcrypt@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmjs.org/fastify-bcrypt/-/fastify-bcrypt-0.1.1.tgz#afe75bfc744bbe8fd8dab1d32249d594dc73cd4f"
-  integrity sha512-HtGxbLF7gSsRrqbeC//31X3TuQNYz/D8ADs7mU1osOPKck0CqmP75EiING3EhVLpoRBKYRsQJrSBWVqHIp66Xg==
-  dependencies:
-    bcryptjs "^2.4.3"
-    fastify-plugin "^2.3.1"
-
 fastify-error@^0.3.0:
   version "0.3.1"
   resolved "https://registry.npmjs.org/fastify-error/-/fastify-error-0.3.1.tgz#8eb993e15e3cf57f0357fc452af9290f1c1278d2"
   integrity sha512-oCfpcsDndgnDVgiI7bwFKAun2dO+4h84vBlkWsWnz/OUK9Reff5UFoFl241xTiLeHWX/vU9zkDVXqYUxjOwHcQ==
-
-fastify-plugin@^2.3.1:
-  version "2.3.4"
-  resolved "https://registry.npmjs.org/fastify-plugin/-/fastify-plugin-2.3.4.tgz#b17abdc36a97877d88101fb86ad8a07f2c07de87"
-  integrity sha512-I+Oaj6p9oiRozbam30sh39BiuiqBda7yK2nmSPVwDCfIBlKnT8YB3MY+pRQc2Fcd07bf6KPGklHJaQ2Qu81TYQ==
-  dependencies:
-    semver "^7.3.2"
 
 fastify-plugin@^3.0.0:
   version "3.0.0"

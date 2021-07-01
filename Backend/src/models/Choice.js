@@ -2,12 +2,14 @@ const { Schema, model } = require("mongoose")
 
 const schema = new Schema({
   subject: {
+    type: Schema.Types.ObjectId,
     required: true,
-    ref: { type: Schema.Types.ObjectId, ref: "Subject" },
+    ref: "Subject",
   },
   user: {
+    type: Schema.Types.ObjectId,
     required: true,
-    ref: { type: Schema.Types.ObjectId, ref: "User" },
+    ref: "User",
   },
   goal: {
     type: Number,
@@ -19,7 +21,7 @@ const schema = new Schema({
     default: 0,
   },
   log: {
-    type: [Mixed],
+    type: [Object],
     required: false,
     default: [],
   },

@@ -21,5 +21,9 @@
     }
   },
   "license": "BSD",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "fastify-cookie": "^5.3.1",
+    "fastify-jwt": "^3.0.0"
+  }
 }

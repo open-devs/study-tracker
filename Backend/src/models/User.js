@@ -19,18 +19,23 @@ const schema = new Schema({
     required: [true, "Username is required"],
     unique: [true, "Username already exists"],
     trim: true,
+    minLength: [4, "Username should be minimum of 4 letters"],
+    maxLength: [12, "Username should be maximum of 12 letters"],
   },
   name: {
     type: String,
-    lowercase: true,
     trim: true,
+    minLength: [4, "Name should be minimum of 4 letters"],
+    maxLength: [30, "Name should be maximum of 30 letters"],
+    validate: {
+      validator: (v) => /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(v),
+      message: (props) => `${props.value} is not a valid name!`,
+    },
   },
   password: {
     type: String,
     required: [true, "Password is required"],
     trim: true,
-    maxLength: [25, "Password should be maximum 25 letters"],
-    minLength: [8, "Password should be minimum 8 letters"],
   },
 })
 

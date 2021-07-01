@@ -14,19 +14,36 @@ const mongoose = require("mongoose")
 
 // Instantiate Fastify with some config
 const app = Fastify({
-  logger: true,
+  logger: {
+    redact: ["req.headers.authorization", "req.body.password"],
+    level: "info",
+    serializers: {
+      req(req) {
+        return {
+          method: req.method,
+          url: req.url,
+          headers: req.headers,
+          hostname: req.hostname,
+          remoteAddress: req.ip,
+          remotePort: req.connection.remotePort,
+        }
+      },
+    },
+  },
 })
 
 // Register your application as a normal plugin.
 const appService = require("./src/app")
 app.register(appService)
 
-console.log(process.env.MONGOOSE_CONNECTION_STRING)
-
 mongoose
   .connect(
     process.env.MONGOOSE_CONNECTION_STRING ||
-      `mongodb://localhost/study-tracker-db`
+      `mongodb://localhost/study-tracker-db`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
   )
   .then(() => console.log(`Mongoose connected successfully`))
   .catch(async (err) => {
