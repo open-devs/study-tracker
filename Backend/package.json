@@ -1,27 +1,30 @@
 {
-  "name": "Backend",
+  "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "tap \"test/**/*.test.js\"",
-    "start": "fastify start -l info app.js",
-    "dev": "fastify start -w -l info -P app.js"
+    "start": "nodemon server"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "BSD",
   "dependencies": {
+    "@hapi/boom": "^9.1.2",
     "fastify": "^3.0.0",
-    "fastify-plugin": "^3.0.0",
     "fastify-autoload": "^3.3.1",
+    "fastify-bcrypt": "^0.1.1",
+    "fastify-plugin": "^3.0.0",
     "fastify-sensible": "^3.1.0",
-    "fastify-cli": "^2.13.0"
+    "fastify-swagger": "^4.8.2",
+    "mongoose": "^5.13.0"
   },
   "devDependencies": {
+    "nodemon": "^2.0.9",
     "tap": "^15.0.9"
   }
 }
