@@ -34,18 +34,10 @@ const login = async (req, res) => {
       username: user.username,
     })
 
-    res
-      .setCookie("token", token, {
-        domain: process.env.NODE_ENV === "production" ? "your.domain" : "*",
-        path: "/",
-        secure: process.env.NODE_ENV === "production", // send cookie over HTTPS only
-        httpOnly: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production", // alternative CSRF protection
-      })
-      .code(200)
-      .send({
-        status: true,
-      })
+    res.code(200).send({
+      status: true,
+      token,
+    })
   } catch (err) {
     throw boom.boomify(err)
   }

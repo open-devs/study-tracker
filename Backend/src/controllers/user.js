@@ -7,9 +7,9 @@ const boom = require("@hapi/boom")
 const { User } = require("../models")
 
 // Get single user by ID
-const getSingle = async (req, reply) => {
+const getSingle = async (req, res) => {
   try {
-    const id = req.params.id
+    const id = req.user
     const user = await User.findById(id)
     return user
   } catch (err) {
@@ -18,7 +18,7 @@ const getSingle = async (req, reply) => {
 }
 
 // Add a new user
-const add = async (req, reply) => {
+const add = async (req, res) => {
   try {
     const user = new User(req.body)
     return user.save()
@@ -28,7 +28,7 @@ const add = async (req, reply) => {
 }
 
 // Update an existing user
-const update = async (req, reply) => {
+const update = async (req, res) => {
   try {
     const id = req.params.id
     const user = req.body
@@ -41,7 +41,7 @@ const update = async (req, reply) => {
 }
 
 // Delete a user
-const deleteOne = async (req, reply) => {
+const deleteOne = async (req, res) => {
   try {
     const id = req.params.id
     const user = await User.findByIdAndRemove(id)

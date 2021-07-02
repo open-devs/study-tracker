@@ -7,7 +7,7 @@ const boom = require("@hapi/boom")
 const { Subject } = require("../models")
 
 // Get all subjects
-const getAll = async (req, reply) => {
+const getAll = async (req, res) => {
   try {
     const subjects = await Subject.find()
     return subjects
@@ -17,7 +17,7 @@ const getAll = async (req, reply) => {
 }
 
 // Add a new subject
-const add = async (req, reply) => {
+const add = async (req, res) => {
   try {
     const subject = new Subject(req.body)
     return subject.save()
@@ -26,35 +26,7 @@ const add = async (req, reply) => {
   }
 }
 
-// Update an existing subject
-const update = async (req, reply) => {
-  try {
-    const id = req.params.id
-    const subject = req.body
-    const { ...updateData } = subject
-    const update = await Subject.findByIdAndUpdate(id, updateData, {
-      new: true,
-    })
-    return update
-  } catch (err) {
-    throw boom.boomify(err)
-  }
-}
-
-// Delete a subject
-const deleteOne = async (req, reply) => {
-  try {
-    const id = req.params.id
-    const subject = await Subject.findByIdAndRemove(id)
-    return subject
-  } catch (err) {
-    throw boom.boomify(err)
-  }
-}
-
 module.exports = {
   getAll,
   add,
-  update,
-  delete: deleteOne,
 }

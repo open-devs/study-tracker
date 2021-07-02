@@ -7,7 +7,7 @@ const boom = require("@hapi/boom")
 const { Choice } = require("../models")
 
 // Get all choices
-const getAll = async (req, reply) => {
+const getAll = async (req, res) => {
   try {
     const choices = await Choice.find()
     return choices
@@ -17,7 +17,7 @@ const getAll = async (req, reply) => {
 }
 
 // Get single choice by ID
-const getSingle = async (req, reply) => {
+const getSingle = async (req, res) => {
   try {
     const id = req.params.id
     const choice = await Choice.findById(id)
@@ -28,7 +28,7 @@ const getSingle = async (req, reply) => {
 }
 
 // Add a new choice
-const add = async (req, reply) => {
+const add = async (req, res) => {
   try {
     const choice = new Choice(req.body)
     return choice.save()
@@ -38,7 +38,7 @@ const add = async (req, reply) => {
 }
 
 // Update an existing choice
-const update = async (req, reply) => {
+const update = async (req, res) => {
   try {
     const id = req.params.id
     const choice = req.body
@@ -51,7 +51,7 @@ const update = async (req, reply) => {
 }
 
 // Delete a choice
-const deleteOne = async (req, reply) => {
+const deleteOne = async (req, res) => {
   try {
     const id = req.params.id
     const choice = await Choice.findByIdAndRemove(id)
