@@ -13,6 +13,7 @@ module.exports = {
         type: "object",
         properties: {
           status: { type: "boolean" },
+          token: { type: "string" },
         },
       },
     },
