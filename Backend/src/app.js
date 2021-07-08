@@ -5,7 +5,20 @@ const AutoLoad = require("fastify-autoload")
 
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
-  fastify.register(require('fastify-cors'))
+  fastify.register(require('fastify-cors'), {
+    origin: (origin, cb) => {
+      let corsOptions = {
+        origin: false,
+      }
+      if(/localhost/.test(origin)){
+        corsOptions.origin = true;
+        cb(null, corsOptions)
+        return
+      }
+      // Generate an error on other origins, disabling access
+      cb(new Error("Not allowed"))
+    }
+  })
 
   // Do not touch the following lines
 

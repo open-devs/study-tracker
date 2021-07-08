@@ -120,7 +120,7 @@
 
 <script>
 import { ref } from "vue";
-import axios from "axios";
+import AuthService from '../services/auth'
 
 export default {
   name: "Auth",
@@ -137,30 +137,16 @@ export default {
       email: "",
       password: "",
     });
-    console.log(process.env);
 
     const onSignin = async () => {
-      console.log(loginObj.value.username, loginObj.value.password);
-      const response = await axios.post(
-        `${process.env.VUE_APP_BASE_URL}api/auth/login`,
-        loginObj.value
-      );
-      console.log(response.data);
+      const response = await AuthService.login(loginObj.value)
+      localStorage.setItem('bearer', response.data)
       loginObj.value.username = "";
       loginObj.value.password = "";
     };
 
     const onSignup = async () => {
-      console.log(
-        singupObj.value.name,
-        singupObj.value.email,
-        singupObj.value.password
-      );
-      const response = await axios.post(
-        `${process.env.VUE_APP_BASE_URL}api/auth/signup`,
-        singupObj.value
-      );
-      console.log(response.data);
+      await AuthService.signup(singupObj.value);
       singupObj.value.name = "";
       singupObj.value.username = "";
       singupObj.value.email = "";
