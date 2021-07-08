@@ -4,7 +4,7 @@ import ErrorService from './error'
 const AuthService =  Object.freeze({
   signup: async (data) => {
     try {
-      return await http.get("/auth/signup", data);
+      return await http.post("/auth/signup", data);
     } catch (error) {
       return ErrorService.onError(error)
     }
