@@ -1,7 +1,7 @@
 "use strict"
 
 const { subject } = require("../controllers")
-const { getAll, add } = require("../schemas/subject")
+const { getAll, add, addMultiple } = require("../schemas/subject")
 
 module.exports = async function (fastify, opts) {
   fastify.route({
@@ -14,7 +14,7 @@ module.exports = async function (fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/subject",
-    schema: add,
-    handler: subject.add,
+    schema: addMultiple,
+    handler: subject.addMultiple,
   })
 }

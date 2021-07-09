@@ -35,7 +35,7 @@
             type="button"
             class="btn btn-success btn-sm"
             data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
+            data-bs-target="#signupModel"
           >
             Sign Up
           </button></small
@@ -46,16 +46,17 @@
     <!-- Modal -->
     <div
       class="modal fade"
-      id="exampleModal"
+      id="signupModel"
       tabindex="-1"
-      aria-labelledby="exampleModalLabel"
+      aria-labelledby="signupModelLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+            <h5 class="modal-title" id="signupModelLabel">Sign Up</h5>
             <button
+              ref="modalClose"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
@@ -121,6 +122,8 @@
 <script>
 import { ref } from "vue";
 import AuthService from '../services/auth'
+import AlertService from '../services/alert'
+import router from '../router'
 
 export default {
   name: "Auth",
@@ -137,16 +140,20 @@ export default {
       email: "",
       password: "",
     });
+    const modalClose = ref(null)
 
     const onSignin = async () => {
-      const response = await AuthService.login(loginObj.value)
-      localStorage.setItem('bearer', response.data)
+      const response = await AuthService.login(loginObj.value);
+      response?.data?.token && localStorage.setItem('bearer', response.data.token);
+      router.push('/dashboard')
       loginObj.value.username = "";
       loginObj.value.password = "";
     };
 
     const onSignup = async () => {
       await AuthService.signup(singupObj.value);
+      modalClose.value.click();
+      AlertService.displayAlert('Successful!', `Signup successfull, login to proceed!`, "success")
       singupObj.value.name = "";
       singupObj.value.username = "";
       singupObj.value.email = "";
@@ -159,6 +166,7 @@ export default {
       loginObj,
       onSignin,
       onSignup,
+      modalClose
     };
   },
 };

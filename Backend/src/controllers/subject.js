@@ -16,11 +16,12 @@ const getAll = async (req, res) => {
   }
 }
 
-// Add a new subject
-const add = async (req, res) => {
+
+// Add new subjects
+const addMultiple = async (req, res) => {
   try {
-    const subject = new Subject(req.body)
-    return subject.save()
+    let data = req.body.map(el => ({ title: el }))
+    return await Subject.insertMany(data)
   } catch (err) {
     throw boom.boomify(err)
   }
@@ -28,5 +29,5 @@ const add = async (req, res) => {
 
 module.exports = {
   getAll,
-  add,
+  addMultiple
 }

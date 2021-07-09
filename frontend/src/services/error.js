@@ -1,6 +1,5 @@
-import Swal from "sweetalert2";
-import "sweetalert2/dist/sweetalert2.min.css";
-
+import AlertService from './alert'
+import router from '../router'
 export default class ErrorService {
   constructor() {
     // this.initHandler();
@@ -8,9 +7,16 @@ export default class ErrorService {
 
   static onError(error) {
     const response = error.response;
-    if (response && response.status >= 400 && response.status < 405) {
-      ErrorService.apiError(error.response.data);
-      return false;
+    if (response) {
+      if (response.status === 401) {
+        ErrorService.apiError(error.response.data);
+        localStorage.clear();
+        router.push('/')
+        return false;
+      } else if (response.status >= 400 && response.status < 405) {
+        ErrorService.apiError(error.response.data);
+        return false;
+      }
     }
     ErrorService.normalError(error);
   }
@@ -33,21 +39,14 @@ export default class ErrorService {
     };
   }
 
-  static displayErrorAlert(message) {
-    Swal.fire({
-      title: "Error!",
-      text: message,
-      icon: "error",
-    });
-  }
 
   static normalError(error) {
     console.log(error);
-    this.displayErrorAlert(error.message);
+    AlertService.displayAlert("Error!", error.message, "error");
   }
 
   static apiError(error) {
     console.log(error);
-    this.displayErrorAlert(error.message);
+    AlertService.displayAlert("Error!", error.message, "error");
   }
 }
