@@ -6,7 +6,6 @@
           Subjects you're planning to study today:
         </h1>
         <Multiselect
-          v-model="value"
           mode="tags"
           :searchable="true"
           :createTag="true"
@@ -51,14 +50,8 @@
               </ul>
             </div>
             <div class="col-md-12 mx-auto" v-if="totalTime > 0">
-              <div :class="`alert alert-${alertClass}`" role="alert">
-                {{
-                  totalTime >= 10
-                    ? "It seems a bit too much"
-                    : totalTime > 5
-                    ? "Achievable but challenging"
-                    : "Good goals, Let's get started!"
-                }}
+              <div :class="`alert alert-${alert.class}`" role="alert">
+                {{ alert.text }}
               </div>
             </div>
           </div>
@@ -88,12 +81,18 @@ export default {
         0
       )
     );
-    const alertClass = computed(() =>
+    const alert = computed(() =>
       totalTime.value >= 10
-        ? "danger"
-        : totalTime.value >= 5
-        ? "warning"
-        : "success"
+        ? {
+            class: "danger",
+            text: "Target seems a bit too much, proceed with caution!",
+          }
+        : totalTime.value >= 7
+        ? {
+            class: "warning",
+            text: "Achievable but still very challenging, proceed with caution!",
+          }
+        : { class: "success", text: "Good goals, Let's get started!" }
     );
 
     onMounted(() => {
@@ -122,7 +121,7 @@ export default {
       selectedVal,
       displayHoursMins,
       totalTime,
-      alertClass,
+      alert,
     };
   },
 };
