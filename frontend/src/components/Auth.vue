@@ -120,10 +120,10 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import AuthService from '../services/auth'
-import AlertService from '../services/alert'
-import router from '../router'
+import { ref, onMounted } from "vue";
+import AuthService from "../services/auth";
+import AlertService from "../services/alert";
+import router from "../router";
 
 export default {
   name: "Auth",
@@ -140,12 +140,19 @@ export default {
       email: "",
       password: "",
     });
-    const modalClose = ref(null)
+    const modalClose = ref(null);
+
+    onMounted(() => {
+      if (localStorage.getItem("bearer")) {
+        router.push("/dashboard");
+      }
+    });
 
     const onSignin = async () => {
       const response = await AuthService.login(loginObj.value);
-      response?.data?.token && localStorage.setItem('bearer', response.data.token);
-      router.push('/dashboard')
+      response?.data?.token &&
+        localStorage.setItem("bearer", response.data.token);
+      router.push("/dashboard");
       loginObj.value.username = "";
       loginObj.value.password = "";
     };
@@ -153,7 +160,11 @@ export default {
     const onSignup = async () => {
       await AuthService.signup(singupObj.value);
       modalClose.value.click();
-      AlertService.displayAlert('Successful!', `Signup successfull, login to proceed!`, "success")
+      AlertService.displayAlert(
+        "Successful!",
+        `Signup successfull, login to proceed!`,
+        "success"
+      );
       singupObj.value.name = "";
       singupObj.value.username = "";
       singupObj.value.email = "";
@@ -166,7 +177,7 @@ export default {
       loginObj,
       onSignin,
       onSignup,
-      modalClose
+      modalClose,
     };
   },
 };
