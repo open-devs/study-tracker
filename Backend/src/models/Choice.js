@@ -12,19 +12,22 @@ const schema = new Schema({
     ref: "User",
   },
   goal: {
-    type: Number,
+    type: Number, // 120
     required: [true, "Goal is required"],
-  },
-  elapsed: {
-    type: Number,
-    required: true,
-    default: 0,
   },
   log: {
     type: [Object],
     required: false,
-    default: [],
+    default: [], // [ {event: "start", time: "12:00"}, {event: "stop", time: "Date.now()"} ]
   },
+}, {
+  timestamps: true
 })
+
+// 1. Route => GET all data of one day for a user using req.user._id { subject, goal, elapsed }
+// 2. Route => PATCH start/stop to update log
+// 3. Route => POST to create entry
+// 4. Route => GET history of 7 days
+// [{ date: "13/07", choices: [{ subject: "maths", goal: "120", log: [] }, { subject: "english", goal: "60", log: [] }] }, {}, {}]
 
 module.exports = model("Choice", schema)
