@@ -10,25 +10,25 @@ const state = {
 // getters
 const getters = {
   get: (state) => {
-    return state.items;
+    return state.items
   },
   getSelected: (state) => {
-    return state.selectedValues;
+    return state.selectedValues
   },
 }
 
 // actions
 const actions = {
-  async get ({ commit }) {
+  async get({ commit }) {
     try {
-      const response = await subject.get();
+      const response = await subject.get()
       if (response && response.data) {
-        let data = response.data;
-        data = data.map(el => el.title);
-        return commit('set', { key: 'items', items: data});
+        let data = response.data
+        data = data.map(el => el.title)
+        return commit('set', { key: 'items', items: data })
       }
     } catch (error) {
-      ErrorService.onError(error);
+      ErrorService.onError(error)
     }
   },
 
@@ -36,15 +36,15 @@ const actions = {
     try {
       let subjectData = data.filter(el => !state.items.includes(el.toLowerCase()))
       if (subjectData.length) {
-        await subject.save(subjectData);
-        await dispatch('get');
+        await subject.save(subjectData)
+        await dispatch('get')
       }
     } catch (error) {
-      ErrorService.onError(error);
+      ErrorService.onError(error)
     }
   },
 
-  saveSelected ({ commit }, data) {
+  saveSelected({ commit }, data) {
     return commit('set', { key: 'selectedValues', items: data })
   }
 
@@ -54,7 +54,7 @@ const actions = {
 const mutations = {
 
   set(state, { key, items }) {
-    state[key] = items;
+    state[key] = items
   },
 
 }

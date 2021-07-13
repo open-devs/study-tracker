@@ -15,27 +15,64 @@
           @change="dropdownValueChange"
         />
 
-        <div class="row align-items-center g-md-5 py-5">
-          <div class="col-md-12 mx-auto">
-            <ul class="list-group">
-              <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(value) of selectedVal" :key="value">
-                {{ value }}
-              </li>
-            </ul>
+        <form>
+          <div class="row align-items-center g-md-5 py-5">
+            <div class="col-md-12 mx-auto">
+              <h3>Selected subjects for today:</h3>
+              <ul class="list-group">
+                {{
+                  !selectedVal.length ? `Nothing Selected Yet` : null
+                }}
+                <li
+                  class="
+                    list-group-item
+                    d-flex
+                    justify-content-between
+                    align-items-center
+                    goal-list
+                  "
+                  v-for="value of selectedVal"
+                  :key="value.title"
+                >
+                  <span
+                    >{{ value.title }}
+                    <small class="text-muted">
+                      for {{ displayHoursMins(value.goal) || `0 mins` }}</small
+                    ></span
+                  >
+                  <input
+                    :class="`input-${value.title}`"
+                    type="time"
+                    v-model="value.goal"
+                    max="10:00:00"
+                    :aria-label="`Set Goal for ${value.title}`"
+                  />
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-12 mx-auto" v-if="totalTime > 0">
+              <div :class="`alert alert-${alertClass}`" role="alert">
+                {{
+                  totalTime >= 10
+                    ? "It seems a bit too much"
+                    : totalTime > 5
+                    ? "Achievable but challenging"
+                    : "Good goals, Let's get started!"
+                }}
+              </div>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
-      <div class="col-md-6 mx-auto">
-        Table here
-      </div>
+      <div class="col-md-6 mx-auto">Table here</div>
     </div>
   </div>
 </template>
 
 <script>
-import Multiselect from '@vueform/multiselect'
-import { computed, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import Multiselect from "@vueform/multiselect";
+import { computed, onMounted, ref } from "vue";
+import { useStore } from "vuex";
 export default {
   name: "Dashboard",
   components: {
@@ -43,25 +80,51 @@ export default {
   },
   setup() {
     const store = useStore();
-    const options = computed(() => store.getters['subjects/get']);
-    const selectedVal = computed(() => store.getters['subjects/getSelected']);
+    const options = computed(() => store.getters["subjects/get"]);
+    const selectedVal = ref([]);
+    const totalTime = computed(() =>
+      selectedVal.value.reduce(
+        (acc, el) => acc + (el.goal ? parseInt(el.goal.split(":")[0]) : 0),
+        0
+      )
+    );
+    const alertClass = computed(() =>
+      totalTime.value >= 10
+        ? "danger"
+        : totalTime.value >= 5
+        ? "warning"
+        : "success"
+    );
 
     onMounted(() => {
-      store.dispatch('subjects/get')
-    })
+      store.dispatch("subjects/get");
+    });
 
     const dropdownValueChange = (value) => {
-      value.forEach(el => el.toLowerCase());
-      store.dispatch('subjects/save', value);
-      store.dispatch('subjects/saveSelected', value);
-    }
+      value.forEach((el) => el.toLowerCase());
+      store.dispatch("subjects/save", value);
+      selectedVal.value = value.map((el) => ({
+        title: el,
+        goal: `00:00`,
+      }));
+    };
+
+    const displayHoursMins = (value) => {
+      if (value && value.length) {
+        let [hours, mins] = value.split(":").map((el) => parseInt(el));
+        return `${hours} hours & ${mins} mins`;
+      }
+    };
 
     return {
       options,
       dropdownValueChange,
-      selectedVal
-    }
-  }
+      selectedVal,
+      displayHoursMins,
+      totalTime,
+      alertClass,
+    };
+  },
 };
 </script>
 

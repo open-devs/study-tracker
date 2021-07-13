@@ -10,8 +10,8 @@ module.exports = async function (fastify, opts) {
       let corsOptions = {
         origin: false,
       }
-      if(/localhost/.test(origin)){
-        corsOptions.origin = true;
+      if (/localhost/.test(origin) || /127.0.0.1/.test(origin)) {
+        corsOptions.origin = true
         cb(null, corsOptions)
         return
       }
