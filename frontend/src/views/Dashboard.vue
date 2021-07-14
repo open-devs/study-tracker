@@ -1,20 +1,29 @@
 <template>
-  <div id="dashboard-container" class="container-fluid p-5">
-    <div class="row align-items-center g-md-5 py-5">
-      <SubjectSelection />
-      <SubjectTable />
+  <div>
+    <div id="dashboard-container" class="container-fluid p-5">
+      <div class="row g-md-5 py-5">
+        <SubjectSelection />
+        <SubjectTable />
+      </div>
     </div>
+    <nav
+      class="
+        navbar navbar-light
+        bg-light
+        container-fluid
+        justify-content-center
+      "
+    >
+      <router-link to="/dashboard">
+        <button class="btn btn-success me-2" type="button">Dashboard</button>
+      </router-link>
+      <router-link to="/history">
+        <button class="btn btn-outline-secondary me-2" type="button">
+          History
+        </button>
+      </router-link>
+    </nav>
   </div>
-  <nav class="navbar navbar-light bg-light">
-    <form class="container-fluid justify-content-start">
-      <button class="btn btn-outline-success me-2" type="button">
-        Main button
-      </button>
-      <button class="btn btn-outline-secondary me-2" type="button">
-        Smaller button
-      </button>
-    </form>
-  </nav>
 </template>
 
 <script>

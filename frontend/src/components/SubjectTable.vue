@@ -1,9 +1,12 @@
 <template>
-  <div class="col-md-6 mx-auto">
-    <table class="table table-hover">
-      <thead>
+  <div class="col-md-6">
+    <h2>Plan for Today:</h2>
+    <table class="table table-hover table-responsive">
+      <caption>
+        You can add more subjects in the plan!
+      </caption>
+      <thead class="table-dark">
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Subject</th>
           <th scope="col">Planned Hour</th>
           <th scope="col">Elapsed Hour</th>
@@ -11,8 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in selectedSubject" :key="index">
-          <th scope="row">{{ index + 1 }}</th>
+        <tr v-for="item in selectedSubject" :key="item.subject">
           <td>{{ item.subject }}</td>
           <td>{{ item.plannedHour }}</td>
           <td>{{ item.elapsed }}</td>

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-6 mx-auto">
+  <div class="col-md-6">
     <h1 class="display-4 fw-bold lh-1 mb-3">
       Subjects you're planning to study today:
     </h1>
@@ -11,47 +11,55 @@
       placeholder="select or type custom subjects"
       @change="dropdownValueChange"
     />
-
-    <form>
-      <div class="row align-items-center g-md-5 py-5">
-        <div class="col-md-12 mx-auto">
-          <h3>Selected subjects for today:</h3>
-          <ul class="list-group">
-            {{
-              !selectedVal.length ? `Nothing Selected Yet` : null
-            }}
-            <li
-              class="
-                list-group-item
-                d-flex
-                justify-content-between
-                align-items-center
-                goal-list
-              "
-              v-for="value of selectedVal"
-              :key="value.title"
+    <form class="row align-items-center g-md-5 py-5">
+      <div class="col-md-12 mx-auto">
+        <h2>Selected subjects for today:</h2>
+        <ul class="list-group">
+          {{
+            !selectedVal.length ? `Nothing Selected Yet` : null
+          }}
+          <li
+            class="
+              list-group-item
+              d-flex
+              justify-content-between
+              align-items-center
+              goal-list
+            "
+            v-for="value of selectedVal"
+            :key="value.title"
+          >
+            <span
+              >{{ value.title }}
+              <small class="text-muted">
+                for {{ displayHoursMins(value.goal) || `0 mins` }}</small
+              ></span
             >
-              <span
-                >{{ value.title }}
-                <small class="text-muted">
-                  for {{ displayHoursMins(value.goal) || `0 mins` }}</small
-                ></span
-              >
-              <input
-                :class="`input-${value.title}`"
-                type="time"
-                v-model="value.goal"
-                max="10:00:00"
-                :aria-label="`Set Goal for ${value.title}`"
-              />
-            </li>
-          </ul>
+            <input
+              :class="`input-${value.title}`"
+              type="time"
+              v-model="value.goal"
+              max="10:00:00"
+              :aria-label="`Set Goal for ${value.title}`"
+            />
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-12 mx-auto" v-if="totalTime > 0">
+        <div :class="`alert alert-${alert.class}`" role="alert">
+          {{ alert.text }}
         </div>
-        <div class="col-md-12 mx-auto" v-if="totalTime > 0">
-          <div :class="`alert alert-${alert.class}`" role="alert">
-            {{ alert.text }}
-          </div>
-        </div>
+      </div>
+      <div class="col-md-12 mx-auto d-grid justify-content-md-end">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          data-bs-toggle="submit"
+          :disabled="totalTime === 0"
+          @click="submitData"
+        >
+          Submit
+        </button>
       </div>
     </form>
   </div>
@@ -110,6 +118,11 @@ export default {
       }
     };
 
+    const submitData = ($event) => {
+      $event.preventDefault();
+      console.log(selectedVal.value);
+    };
+
     return {
       options,
       dropdownValueChange,
@@ -117,6 +130,7 @@ export default {
       displayHoursMins,
       totalTime,
       alert,
+      submitData,
     };
   },
 };
