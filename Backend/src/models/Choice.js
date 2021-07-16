@@ -17,8 +17,7 @@ const schema = new Schema({
   },
   log: {
     type: [Object],
-    required: false,
-    default: [], // [ {event: "start", time: "12:00"}, {event: "stop", time: "Date.now()"} ]
+    default: [], // [ { start: number, end: number | null } ]
   },
 }, {
   timestamps: true

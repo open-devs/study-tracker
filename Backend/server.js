@@ -17,6 +17,7 @@ const app = Fastify({
   logger: {
     redact: ["req.headers.authorization", "req.body.password"],
     level: "info",
+    prettyPrint: true,
     serializers: {
       req(req) {
         return {
