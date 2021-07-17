@@ -9,21 +9,8 @@
     "email": "open.devs.github@gmail.com",
     "url": "https://opendevs.in"
   },
-  "scripts": {
-    "commit": "git add . && git cz"
-  },
-  "devDependencies": {
-    "git-cz": "^4.7.6"
-  },
-  "config": {
-    "commitizen": {
-      "path": "git-cz"
-    }
-  },
   "license": "BSD",
   "private": false,
-  "dependencies": {
-    "fastify-cookie": "^5.3.1",
-    "fastify-jwt": "^3.0.0"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }

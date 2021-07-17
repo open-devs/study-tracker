@@ -61,10 +61,6 @@ const signup = async (req, res) => {
       return res.code(statusCode).send(payload)
     }
 
-    if (!name) {
-      name = email
-    }
-
     const salt = await bcrypt.genSalt(+process.env.PASSWORD_SALT_FACTOR)
 
     const passwordHash = await bcrypt.hash(password, salt)
@@ -72,7 +68,7 @@ const signup = async (req, res) => {
     const newUser = new User({
       email,
       password: passwordHash,
-      name,
+      name: !name ? (email.split('@')[0] ?? 'test-name') : name,
       username,
     })
     await newUser.save()

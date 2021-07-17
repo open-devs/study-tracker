@@ -10,7 +10,7 @@ module.exports = async function (fastify, opts) {
       let corsOptions = {
         origin: false,
       }
-      if (/localhost/.test(origin) || /127.0.0.1/.test(origin)) {
+      if (origin == null || /localhost/.test(origin) || /127.0.0.1/.test(origin)) {
         corsOptions.origin = true
         cb(null, corsOptions)
         return
@@ -27,6 +27,7 @@ module.exports = async function (fastify, opts) {
   // through your application
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, "middleware"),
+    ignorePattern: /.*.md/,
     options: Object.assign({}, opts),
   })
 
@@ -35,6 +36,7 @@ module.exports = async function (fastify, opts) {
   // through your application
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, "plugins"),
+    ignorePattern: /.*.md/,
     options: Object.assign({}, opts),
   })
 
@@ -42,6 +44,7 @@ module.exports = async function (fastify, opts) {
   // define your routes in one of these
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, "routes"),
+    ignorePattern: /.*.md/,
     options: Object.assign(
       {
         prefix: "/api",
