@@ -13,12 +13,12 @@ const getMaxStopTime = (createdAt, goal) => {
 }
 
 const getElapsedTime = (createdAt, goal, log) => {
-  let elapsedMs = 0;
+  let elapsedMs = 0
   const maxStop = getMaxStopTime(createdAt, goal)
   /**
    * Add time from all {start, stop} log
    */
-  log.forEach(_log => {
+  log.forEach((_log) => {
     if (_log.stop != null) {
       elapsedMs += _log.stop - _log.start
     }
@@ -27,29 +27,33 @@ const getElapsedTime = (createdAt, goal, log) => {
    * If the last log has has "start" event but no "stop event", add that as well
    */
   if (log.length > 0 && log[log.length - 1].stop == null) {
-    elapsedMs += Math.min(maxStop.valueOf(), new Date().valueOf()) - log[log.length - 1].start
+    elapsedMs +=
+      Math.min(maxStop.valueOf(), new Date().valueOf()) -
+      log[log.length - 1].start
   }
   return elapsedMs
 }
 
 const groupChoicesOnDate = (choices) => {
   const gp = {}
-  choices.forEach(choice => {
-    const date = new Date(choice.createdAt).toISOString().split('T')[0];
+  choices.forEach((choice) => {
+    const date = new Date(choice.createdAt)
+      .toISOString()
+      .split("T")[0]
     if (date in gp) {
       gp[date].push(choice)
     } else {
       gp[date] = [choice]
     }
   })
-  return Object.keys(gp).map(date => ({ date, choices: gp[date] }))
+  return Object.keys(gp).map((date) => ({ date, choices: gp[date] }))
 }
 
 // Get all choices of user for a given day.
 const getAll = async (req, res) => {
   try {
-    const { start, end } = req.query;
-    const { _id: userId } = req.user;
+    const { start, end } = req.query
+    const { _id: userId } = req.user
     // Range is [start, end)
     const $gte = new Date(start).toISOString()
     const $lte = new Date(new Date(end).valueOf() - 1).toISOString()
@@ -58,12 +62,14 @@ const getAll = async (req, res) => {
       createdAt: {
         $gte,
         $lte,
-      }
-    })
-    .populate('subject')
+      },
+    }).populate("subject")
     const res = choices
-      .map(x => x.toObject())
-      .map(x => ({ ...x, elapsed: getElapsedTime(x.createdAt, x.goal, x.log) }))
+      .map((x) => x.toObject())
+      .map((x) => ({
+        ...x,
+        elapsed: getElapsedTime(x.createdAt, x.goal, x.log),
+      }))
     return groupChoicesOnDate(res)
   } catch (err) {
     throw boom.boomify(err)
@@ -73,13 +79,13 @@ const getAll = async (req, res) => {
 // Add a new choice
 const add = async (req, res) => {
   try {
-    const { _id: userId } = req.user;
+    const { _id: userId } = req.user
     const { subject, goal } = req.body
     const choice = new Choice({
       subject,
       user: userId,
       goal,
-      log: []
+      log: [],
     })
     return choice.save()
   } catch (err) {
@@ -91,15 +97,15 @@ const add = async (req, res) => {
 const updateLog = async (req, res) => {
   try {
     const id = req.params.id
-    const { _id: userId } = req.user;
+    const { _id: userId } = req.user
     const { eventType } = req.body
-    const choice = await Choice.findById(id);
+    const choice = await Choice.findById(id)
     if (choice == null) {
-      throw new Error('Choice with given id not found')
+      throw new Error("Choice with given id not found")
     }
     const choiceUserId = choice.user.toString() // ObjectId to string
     if (choiceUserId !== userId) {
-      throw new Error('This choice does not belong to you.')
+      throw new Error("This choice does not belong to you.")
     }
     /**
      * Make sure that the choice hasn't expired, i.e. choice createdAt + goal time should be
@@ -109,31 +115,46 @@ const updateLog = async (req, res) => {
     console.log(maxStopTime.toISOString())
     console.log(new Date().toISOString())
     if (maxStopTime.valueOf() < new Date().valueOf()) {
-      throw new Error('Choice has expired. Cannot start or stop the timer now.')
+      throw new Error(
+        "Choice has expired. Cannot start or stop the timer now."
+      )
     }
-    const prevLogs = choice.log;
-    if (eventType === 'start') {
+    const prevLogs = choice.log
+    if (eventType === "start") {
       /**
        * If it's a "start" event, then we push a new event in the log array with `stop` field set to `null`.
        */
-      if (prevLogs.length > 0 && prevLogs[prevLogs.length - 1].stop == null) {
-        throw new Error(`Timer must be stopped first beforing starting again.`)
+      if (
+        prevLogs.length > 0 &&
+        prevLogs[prevLogs.length - 1].stop == null
+      ) {
+        throw new Error(
+          `Timer must be stopped first beforing starting again.`
+        )
       }
-      const newLogs = [...prevLogs, { start: new Date().valueOf(), stop: null }]
+      const newLogs = [
+        ...prevLogs,
+        { start: new Date().valueOf(), stop: null },
+      ]
       await choice.update({ $set: { log: newLogs } })
       return { ...choice.toJSON(), log: newLogs }
-    } else if (eventType === 'stop') {
+    } else if (eventType === "stop") {
       /**
        * If it's a "stop" event, then we take the last "start" event and update it's stop time
        */
-      if (prevLogs.length === 0 || prevLogs[prevLogs.length - 1].stop != null) {
-        throw new Error(`'stop' event must have a corresponding 'start' event`)
+      if (
+        prevLogs.length === 0 ||
+        prevLogs[prevLogs.length - 1].stop != null
+      ) {
+        throw new Error(
+          `'stop' event must have a corresponding 'start' event`
+        )
       }
-      prevLogs[prevLogs.length - 1].stop = new Date().valueOf();
+      prevLogs[prevLogs.length - 1].stop = new Date().valueOf()
       await choice.update({ $set: { log: prevLogs } })
       return { ...choice.toJSON(), log: prevLogs }
     }
-    throw new Error('Unknown event type.')
+    throw new Error("Unknown event type.")
   } catch (err) {
     throw boom.boomify(err)
   }

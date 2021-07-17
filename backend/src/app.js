@@ -2,28 +2,31 @@
 
 const path = require("path")
 const AutoLoad = require("fastify-autoload")
-const FastifyStatic = require('fastify-static')
+const FastifyStatic = require("fastify-static")
 
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
-  fastify.register(require('fastify-cors'), {
+  fastify.register(require("fastify-cors"), {
     origin: (origin, cb) => {
       let corsOptions = {
         origin: false,
       }
-      if (origin === undefined || /localhost/.test(origin) || /127.0.0.1/.test(origin)) {
+      if (
+        origin === undefined ||
+        /localhost/.test(origin) ||
+        /127.0.0.1/.test(origin)
+      ) {
         corsOptions.origin = true
         cb(null, corsOptions)
         return
       }
       // Generate an error on other origins, disabling access
       cb(new Error("Not allowed"))
-    }
+    },
   })
 
-
   fastify.register(FastifyStatic, {
-    root: path.join(__dirname, '../dist'),
+    root: path.join(__dirname, "../dist"),
   })
 
   // Do not touch the following lines
@@ -75,5 +78,4 @@ module.exports = async function (fastify, opts) {
     // Vue SPA
     res.status(200).sendFile("dist/index.html")
   })
-
 }

@@ -1,7 +1,7 @@
 module.exports = {
   getAll: {
     querystring: {
-      type: 'object',
+      type: "object",
       required: ["start", "end"],
       properties: {
         start: { type: "string", length: 10 },
@@ -10,7 +10,7 @@ module.exports = {
     },
     response: {
       200: {
-        type: "array"
+        type: "array",
       },
     },
   },
@@ -27,21 +27,21 @@ module.exports = {
       200: {
         type: "object",
         properties: {
-          _id: { type: 'string' },
-          subject: { type: 'string' },
-          user: { type: 'string' },
-          goal: { type: 'number' },
-          elapsed: { type: 'number' },
-          log: { type: 'array' },
-          createdAt: { type: 'string' },
-          updatedAt: { type: 'string' },
+          _id: { type: "string" },
+          subject: { type: "string" },
+          user: { type: "string" },
+          goal: { type: "number" },
+          elapsed: { type: "number" },
+          log: { type: "array" },
+          createdAt: { type: "string" },
+          updatedAt: { type: "string" },
         },
       },
     },
   },
   patch: {
     params: {
-      type: 'object',
+      type: "object",
       properties: {
         id: { type: "string", minLength: 20, maxLength: 30 },
       },
@@ -50,20 +50,20 @@ module.exports = {
       type: "object",
       required: ["eventType"],
       properties: {
-        eventType: { type: "string", enum: ['start', 'stop'] },
+        eventType: { type: "string", enum: ["start", "stop"] },
       },
     },
     response: {
       200: {
         type: "object",
         properties: {
-          _id: { type: 'string' },
-          subject: { type: 'string' },
-          user: { type: 'string' },
-          goal: { type: 'number' },
-          log: { type: 'array' },
-          createdAt: { type: 'string' },
-          updatedAt: { type: 'string' },
+          _id: { type: "string" },
+          subject: { type: "string" },
+          user: { type: "string" },
+          goal: { type: "number" },
+          log: { type: "array" },
+          createdAt: { type: "string" },
+          updatedAt: { type: "string" },
         },
       },
     },

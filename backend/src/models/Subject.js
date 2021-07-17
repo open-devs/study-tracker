@@ -7,7 +7,7 @@ const schema = new Schema({
     lowercase: true,
     unique: true,
     trim: true,
-  }
+  },
 })
 
 module.exports = model("Subject", schema)
