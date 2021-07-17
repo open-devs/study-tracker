@@ -28,7 +28,7 @@ const schema = new Schema({
     minLength: [4, "Name should be minimum of 4 letters"],
     maxLength: [30, "Name should be maximum of 30 letters"],
     validate: {
-      validator: (v) => /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(v),
+      validator: (v) => /^(([A-Za-z]+[,.]?[ ]?|[a-z]+['-]?)+)$/mg.test(v),
       message: (props) => `${props.value} is not a valid name!`,
     },
   },
