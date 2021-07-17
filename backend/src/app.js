@@ -2,6 +2,7 @@
 
 const path = require("path")
 const AutoLoad = require("fastify-autoload")
+const FastifyStatic = require('fastify-static')
 
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
@@ -10,7 +11,11 @@ module.exports = async function (fastify, opts) {
       let corsOptions = {
         origin: false,
       }
+<<<<<<< HEAD:Backend/src/app.js
       if (origin == null || /localhost/.test(origin) || /127.0.0.1/.test(origin)) {
+=======
+      if (origin === undefined || /localhost/.test(origin) || /127.0.0.1/.test(origin)) {
+>>>>>>> main:backend/src/app.js
         corsOptions.origin = true
         cb(null, corsOptions)
         return
@@ -18,6 +23,11 @@ module.exports = async function (fastify, opts) {
       // Generate an error on other origins, disabling access
       cb(new Error("Not allowed"))
     }
+  })
+
+
+  fastify.register(FastifyStatic, {
+    root: path.join(__dirname, '../dist'),
   })
 
   // Do not touch the following lines
@@ -52,4 +62,22 @@ module.exports = async function (fastify, opts) {
       opts
     ),
   })
+
+  // Not found handler
+  fastify.setNotFoundHandler((req, res) => {
+    // // API 404
+    if (req.raw.url && req.raw.url.startsWith("/api")) {
+      return res.status(404).send({
+        success: false,
+        error: {
+          kind: "user_input",
+          message: "Not Found",
+        },
+      })
+    }
+
+    // Vue SPA
+    res.status(200).sendFile("dist/index.html")
+  })
+
 }

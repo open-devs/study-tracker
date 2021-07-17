@@ -23,7 +23,4 @@ const schema = new Schema({
   timestamps: true
 })
 
-// 4. Route => GET history of 7 days
-// [{ date: "13/07", choices: [{ subject: "maths", goal: "120", log: [] }, { subject: "english", goal: "60", log: [] }] }, {}, {}]
-
 module.exports = model("Choice", schema)

@@ -2,7 +2,6 @@
   "name": "study-tracker",
   "version": "0.0.1",
   "description": "project to help you track time spent on each subjects & goals for study sessions",
-  "main": "index.js",
   "repository": "https://github.com/open-devs/study-tracker",
   "author": {
     "name": "open devs",

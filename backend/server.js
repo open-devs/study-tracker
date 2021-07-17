@@ -17,6 +17,7 @@ const app = Fastify({
   logger: {
     redact: ["req.headers.authorization", "req.body.password"],
     level: "info",
+<<<<<<< HEAD:Backend/server.js
     prettyPrint: true,
     serializers: {
       req(req) {
@@ -30,6 +31,9 @@ const app = Fastify({
         }
       },
     },
+=======
+    prettyPrint: true
+>>>>>>> main:backend/server.js
   },
 })
 
@@ -40,7 +44,7 @@ app.register(appService)
 mongoose
   .connect(
     process.env.MONGOOSE_CONNECTION_STRING ||
-      `mongodb://localhost/study-tracker-db`,
+    `mongodb://localhost/study-tracker-db`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
