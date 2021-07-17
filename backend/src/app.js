@@ -11,11 +11,7 @@ module.exports = async function (fastify, opts) {
       let corsOptions = {
         origin: false,
       }
-<<<<<<< HEAD:Backend/src/app.js
-      if (origin == null || /localhost/.test(origin) || /127.0.0.1/.test(origin)) {
-=======
       if (origin === undefined || /localhost/.test(origin) || /127.0.0.1/.test(origin)) {
->>>>>>> main:backend/src/app.js
         corsOptions.origin = true
         cb(null, corsOptions)
         return

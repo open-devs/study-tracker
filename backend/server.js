@@ -17,23 +17,7 @@ const app = Fastify({
   logger: {
     redact: ["req.headers.authorization", "req.body.password"],
     level: "info",
-<<<<<<< HEAD:Backend/server.js
-    prettyPrint: true,
-    serializers: {
-      req(req) {
-        return {
-          method: req.method,
-          url: req.url,
-          headers: req.headers,
-          hostname: req.hostname,
-          remoteAddress: req.ip,
-          remotePort: req.connection.remotePort,
-        }
-      },
-    },
-=======
     prettyPrint: true
->>>>>>> main:backend/server.js
   },
 })
 

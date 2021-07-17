@@ -279,11 +279,7 @@
 
 "@hapi/bourne@^2.0.0":
   version "2.0.0"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/@hapi/bourne/-/bourne-2.0.0.tgz#5bb2193eb685c0007540ca61d166d4e1edaf918d"
-=======
   resolved "https://registry.npmjs.org/@hapi/bourne/-/bourne-2.0.0.tgz#5bb2193eb685c0007540ca61d166d4e1edaf918d"
->>>>>>> main:backend/yarn.lock
   integrity sha512-WEezM1FWztfbzqIUbsDzFRVMxSoLy3HugVcux6KDDtTqzPsLE8NDRHfXvev66aH1i2oOKKar3/XDjbvh/OUBdg==
 
 "@hapi/hoek@9.x.x":
@@ -328,11 +324,7 @@
 
 "@types/jsonwebtoken@^8.5.0":
   version "8.5.4"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.4.tgz#50ccaf0aa6f5d7b9956e70fe323b76e582991913"
-=======
   resolved "https://registry.npmjs.org/@types/jsonwebtoken/-/jsonwebtoken-8.5.4.tgz#50ccaf0aa6f5d7b9956e70fe323b76e582991913"
->>>>>>> main:backend/yarn.lock
   integrity sha512-4L8msWK31oXwdtC81RmRBAULd0ShnAHjBuKT9MRQpjP0piNrZdXyTRcKY9/UIfhGeKIT4PvF5amOOUbbT/9Wpg==
   dependencies:
     "@types/node" "*"
@@ -494,11 +486,7 @@ argparse@^2.0.1:
 
 args@^5.0.1:
   version "5.0.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/args/-/args-5.0.1.tgz#4bf298df90a4799a09521362c579278cc2fdd761"
-=======
   resolved "https://registry.npmjs.org/args/-/args-5.0.1.tgz#4bf298df90a4799a09521362c579278cc2fdd761"
->>>>>>> main:backend/yarn.lock
   integrity sha512-1kqmFCFsPffavQFGt8OxJdIcETti99kySRUPMpOhaGjL6mRJn8HFU1OxKY5bMqfZKUwTQc1mZkAjmGYaVOHFtQ==
   dependencies:
     camelcase "5.0.0"
@@ -660,11 +648,7 @@ bson@^1.1.4:
 
 buffer-equal-constant-time@1.0.1:
   version "1.0.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
-=======
   resolved "https://registry.npmjs.org/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
->>>>>>> main:backend/yarn.lock
   integrity sha1-+OcRMvf/5uAaXJaXpMbz5I1cyBk=
 
 buffer-from@^1.0.0:
@@ -716,11 +700,7 @@ callsites@^2.0.0:
 
 camelcase@5.0.0:
   version "5.0.0"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.0.0.tgz#03295527d58bd3cd4aa75363f35b2e8d97be2f42"
-=======
   resolved "https://registry.npmjs.org/camelcase/-/camelcase-5.0.0.tgz#03295527d58bd3cd4aa75363f35b2e8d97be2f42"
->>>>>>> main:backend/yarn.lock
   integrity sha512-faqwZqnWxbxn+F1d399ygeamQNy3lPp/H9H6rNrqYh4FSVCtcY+3cub1MxA8o9mDd55mM8Aghuu/kuyYA6VTsA==
 
 camelcase@^5.0.0, camelcase@^5.3.1:
@@ -765,11 +745,7 @@ chalk@^3.0.0:
 
 chalk@^4.0.0:
   version "4.1.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.1.tgz#c80b3fab28bf6371e6863325eee67e618b77e6ad"
-=======
   resolved "https://registry.npmjs.org/chalk/-/chalk-4.1.1.tgz#c80b3fab28bf6371e6863325eee67e618b77e6ad"
->>>>>>> main:backend/yarn.lock
   integrity sha512-diHzdDKxcU+bAsUboHLPEDQiw0qEe0qd7SYUn3HgcFlWgbDcfLGswOHYeGrHKzG9z6UYf01d9VFMfZxPM1xZSg==
   dependencies:
     ansi-styles "^4.1.0"
@@ -988,11 +964,7 @@ dashdash@^1.12.0:
 
 dateformat@^4.5.1:
   version "4.5.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-4.5.1.tgz#c20e7a9ca77d147906b6dc2261a8be0a5bd2173c"
-=======
   resolved "https://registry.npmjs.org/dateformat/-/dateformat-4.5.1.tgz#c20e7a9ca77d147906b6dc2261a8be0a5bd2173c"
->>>>>>> main:backend/yarn.lock
   integrity sha512-OD0TZ+B7yP7ZgpJf5K2DIbj3FZvFvxgFUuaqA/V5zTjAtAAXZ1E8bktHxmAGs4x5b7PflqA9LeQ84Og7wYtF7Q==
 
 debug@2.6.9, debug@^2.2.0:
@@ -1109,11 +1081,7 @@ ecc-jsbn@~0.1.1:
 
 ecdsa-sig-formatter@1.0.11:
   version "1.0.11"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz#ae0f0fa2d85045ef14a817daa3ce9acd0489e5bf"
-=======
   resolved "https://registry.npmjs.org/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz#ae0f0fa2d85045ef14a817daa3ce9acd0489e5bf"
->>>>>>> main:backend/yarn.lock
   integrity sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==
   dependencies:
     safe-buffer "^5.0.1"
@@ -1252,11 +1220,7 @@ fast-safe-stringify@^2.0.7:
 
 fastfall@^1.5.0:
   version "1.5.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/fastfall/-/fastfall-1.5.1.tgz#3fee03331a49d1d39b3cdf7a5e9cd66f475e7b94"
-=======
   resolved "https://registry.npmjs.org/fastfall/-/fastfall-1.5.1.tgz#3fee03331a49d1d39b3cdf7a5e9cd66f475e7b94"
->>>>>>> main:backend/yarn.lock
   integrity sha1-P+4DMxpJ0dObPN96XpzWb0dee5Q=
   dependencies:
     reusify "^1.0.0"
@@ -1284,11 +1248,7 @@ fastify-error@^0.3.0:
 
 fastify-jwt@^3.0.0:
   version "3.0.0"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/fastify-jwt/-/fastify-jwt-3.0.0.tgz#d0cf2bfc02cf12b3826f534258f559baf9c8518f"
-=======
   resolved "https://registry.npmjs.org/fastify-jwt/-/fastify-jwt-3.0.0.tgz#d0cf2bfc02cf12b3826f534258f559baf9c8518f"
->>>>>>> main:backend/yarn.lock
   integrity sha512-gFo6AQRz71TEteKisNcgXNYei1QzNBzXH59J00PBoRHhK3YtADF/teQxrKTyR2GeIBwuQnVJNRtsFRgLd7adTA==
   dependencies:
     "@types/jsonwebtoken" "^8.5.0"
@@ -1366,11 +1326,7 @@ fastify@^3.0.0:
 
 fastparallel@^2.2.0:
   version "2.4.0"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/fastparallel/-/fastparallel-2.4.0.tgz#65fbec1a5e5902494be772cf5765cbaaece08688"
-=======
   resolved "https://registry.npmjs.org/fastparallel/-/fastparallel-2.4.0.tgz#65fbec1a5e5902494be772cf5765cbaaece08688"
->>>>>>> main:backend/yarn.lock
   integrity sha512-sacwQ7wwKlQXsa7TN24UvMBLZNLmVcPhmxccC9riFqb3N+fSczJL8eWdnZodZ/KijGVgNBBfvF/NeXER08uXnQ==
   dependencies:
     reusify "^1.0.4"
@@ -1378,11 +1334,7 @@ fastparallel@^2.2.0:
 
 fastq@^1.3.0:
   version "1.11.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.11.1.tgz#5d8175aae17db61947f8b162cfc7f63264d22807"
-=======
   resolved "https://registry.npmjs.org/fastq/-/fastq-1.11.1.tgz#5d8175aae17db61947f8b162cfc7f63264d22807"
->>>>>>> main:backend/yarn.lock
   integrity sha512-HOnr8Mc60eNYl1gzwp6r5RoUyAn5/glBolUzP/Ez6IFVPMPirxn/9phgL6zhOtaTy7ISwPvQ+wT+hfcRZh/bzw==
   dependencies:
     reusify "^1.0.4"
@@ -1396,11 +1348,7 @@ fastq@^1.6.1:
 
 fastseries@^1.7.0:
   version "1.7.2"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/fastseries/-/fastseries-1.7.2.tgz#d22ce13b9433dff3388d91dbd6b8bda9b21a0f4b"
-=======
   resolved "https://registry.npmjs.org/fastseries/-/fastseries-1.7.2.tgz#d22ce13b9433dff3388d91dbd6b8bda9b21a0f4b"
->>>>>>> main:backend/yarn.lock
   integrity sha1-0izhO5Qz3/M4jZHb1ri9qbIaD0s=
   dependencies:
     reusify "^1.0.0"
@@ -1948,20 +1896,12 @@ jackspeak@^1.4.0:
 
 jmespath@^0.15.0:
   version "0.15.0"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
-=======
   resolved "https://registry.npmjs.org/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
->>>>>>> main:backend/yarn.lock
   integrity sha1-o/Iiqarp+Wb10nx5ZRDigJF2Qhc=
 
 joycon@^3.0.0:
   version "3.0.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/joycon/-/joycon-3.0.1.tgz#9074c9b08ccf37a6726ff74a18485f85efcaddaf"
-=======
   resolved "https://registry.npmjs.org/joycon/-/joycon-3.0.1.tgz#9074c9b08ccf37a6726ff74a18485f85efcaddaf"
->>>>>>> main:backend/yarn.lock
   integrity sha512-SJcJNBg32dGgxhPtM0wQqxqV0ax9k/9TaUskGDSJkSFSQOEWWvQ3zzWdGQRIUry2j1zA5+ReH13t0Mf3StuVZA==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
@@ -2032,11 +1972,7 @@ json5@^2.1.2:
 
 jsonwebtoken@^8.5.1:
   version "8.5.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-8.5.1.tgz#00e71e0b8df54c2121a1f26137df2280673bcc0d"
-=======
   resolved "https://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-8.5.1.tgz#00e71e0b8df54c2121a1f26137df2280673bcc0d"
->>>>>>> main:backend/yarn.lock
   integrity sha512-XjwVfRS6jTMsqYs0EsuJ4LGxXV14zQybNd4L2r0UvbVnSF9Af8x7p5MzbJ90Ioz/9TI41/hTCvznF/loiSzn8w==
   dependencies:
     jws "^3.2.2"
@@ -2062,11 +1998,7 @@ jsprim@^1.2.2:
 
 jwa@^1.4.1:
   version "1.4.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/jwa/-/jwa-1.4.1.tgz#743c32985cb9e98655530d53641b66c8645b039a"
-=======
   resolved "https://registry.npmjs.org/jwa/-/jwa-1.4.1.tgz#743c32985cb9e98655530d53641b66c8645b039a"
->>>>>>> main:backend/yarn.lock
   integrity sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA==
   dependencies:
     buffer-equal-constant-time "1.0.1"
@@ -2075,11 +2007,7 @@ jwa@^1.4.1:
 
 jws@^3.2.2:
   version "3.2.2"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/jws/-/jws-3.2.2.tgz#001099f3639468c9414000e99995fa52fb478304"
-=======
   resolved "https://registry.npmjs.org/jws/-/jws-3.2.2.tgz#001099f3639468c9414000e99995fa52fb478304"
->>>>>>> main:backend/yarn.lock
   integrity sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==
   dependencies:
     jwa "^1.4.1"
@@ -2111,11 +2039,7 @@ lcov-parse@^1.0.0:
 
 leven@2.1.0:
   version "2.1.0"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/leven/-/leven-2.1.0.tgz#c2e7a9f772094dee9d34202ae8acce4687875580"
-=======
   resolved "https://registry.npmjs.org/leven/-/leven-2.1.0.tgz#c2e7a9f772094dee9d34202ae8acce4687875580"
->>>>>>> main:backend/yarn.lock
   integrity sha1-wuep93IJTe6dNCAq6KzORoeHVYA=
 
 libtap@^1.1.1:
@@ -2171,65 +2095,37 @@ lodash.flattendeep@^4.4.0:
 
 lodash.includes@^4.3.0:
   version "4.3.0"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/lodash.includes/-/lodash.includes-4.3.0.tgz#60bb98a87cb923c68ca1e51325483314849f553f"
-=======
   resolved "https://registry.npmjs.org/lodash.includes/-/lodash.includes-4.3.0.tgz#60bb98a87cb923c68ca1e51325483314849f553f"
->>>>>>> main:backend/yarn.lock
   integrity sha1-YLuYqHy5I8aMoeUTJUgzFISfVT8=
 
 lodash.isboolean@^3.0.3:
   version "3.0.3"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz#6c2e171db2a257cd96802fd43b01b20d5f5870f6"
-=======
   resolved "https://registry.npmjs.org/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz#6c2e171db2a257cd96802fd43b01b20d5f5870f6"
->>>>>>> main:backend/yarn.lock
   integrity sha1-bC4XHbKiV82WgC/UOwGyDV9YcPY=
 
 lodash.isinteger@^4.0.4:
   version "4.0.4"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
-=======
   resolved "https://registry.npmjs.org/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
->>>>>>> main:backend/yarn.lock
   integrity sha1-YZwK89A/iwTDH1iChAt3sRzWg0M=
 
 lodash.isnumber@^3.0.3:
   version "3.0.3"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/lodash.isnumber/-/lodash.isnumber-3.0.3.tgz#3ce76810c5928d03352301ac287317f11c0b1ffc"
-=======
   resolved "https://registry.npmjs.org/lodash.isnumber/-/lodash.isnumber-3.0.3.tgz#3ce76810c5928d03352301ac287317f11c0b1ffc"
->>>>>>> main:backend/yarn.lock
   integrity sha1-POdoEMWSjQM1IwGsKHMX8RwLH/w=
 
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
-=======
   resolved "https://registry.npmjs.org/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
->>>>>>> main:backend/yarn.lock
   integrity sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=
 
 lodash.isstring@^4.0.1:
   version "4.0.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
-=======
   resolved "https://registry.npmjs.org/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
->>>>>>> main:backend/yarn.lock
   integrity sha1-1SfftUVuynzJu5XV2ur4i6VKVFE=
 
 lodash.once@^4.0.0:
   version "4.1.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
-=======
   resolved "https://registry.npmjs.org/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
->>>>>>> main:backend/yarn.lock
   integrity sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
 
 lodash.throttle@^4.1.1:
@@ -2402,11 +2298,7 @@ mquery@3.2.5:
 
 mri@1.1.4:
   version "1.1.4"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/mri/-/mri-1.1.4.tgz#7cb1dd1b9b40905f1fac053abe25b6720f44744a"
-=======
   resolved "https://registry.npmjs.org/mri/-/mri-1.1.4.tgz#7cb1dd1b9b40905f1fac053abe25b6720f44744a"
->>>>>>> main:backend/yarn.lock
   integrity sha512-6y7IjGPm8AzlvoUrwAaw1tLnUBudaS3752vcd8JtrpGGQn+rXIe63LFVHm/YMwtqAuh+LJPCFdlLYPWM1nYn6w==
 
 ms@2.0.0:
@@ -2667,11 +2559,7 @@ picomatch@^2.0.4, picomatch@^2.2.1:
 
 pino-pretty@^5.1.1:
   version "5.1.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/pino-pretty/-/pino-pretty-5.1.1.tgz#387aebbe0c4504b9e3f6f51148e36d1b336cb16d"
-=======
   resolved "https://registry.npmjs.org/pino-pretty/-/pino-pretty-5.1.1.tgz#387aebbe0c4504b9e3f6f51148e36d1b336cb16d"
->>>>>>> main:backend/yarn.lock
   integrity sha512-bG8a6A2QcZYJXD/ZL7PXn8CDNIUP5TKyQwR9Yjzn5dpGyQ7Wbyl707Dxhx+tPT3BG6YpsXF93Hhe9EUnx0SsPw==
   dependencies:
     "@hapi/bourne" "^2.0.0"
@@ -3182,11 +3070,7 @@ spawn-wrap@^2.0.0:
 
 split2@^3.1.1:
   version "3.2.2"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/split2/-/split2-3.2.2.tgz#bf2cf2a37d838312c249c89206fd7a17dd12365f"
-=======
   resolved "https://registry.npmjs.org/split2/-/split2-3.2.2.tgz#bf2cf2a37d838312c249c89206fd7a17dd12365f"
->>>>>>> main:backend/yarn.lock
   integrity sha512-9NThjpgZnifTkJpzTZ7Eue85S49QwpNhZTq6GRJwObb6jnLFNGB7Qm73V5HewTROPyxD0C29xqmaI68bQtV+hg==
   dependencies:
     readable-stream "^3.0.0"
@@ -3225,11 +3109,7 @@ stack-utils@^2.0.1:
 
 steed@^1.1.3:
   version "1.1.3"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/steed/-/steed-1.1.3.tgz#f1525dd5adb12eb21bf74749537668d625b9abc5"
-=======
   resolved "https://registry.npmjs.org/steed/-/steed-1.1.3.tgz#f1525dd5adb12eb21bf74749537668d625b9abc5"
->>>>>>> main:backend/yarn.lock
   integrity sha1-8VJd1a2xLrIb90dJU3Zo1iW5q8U=
   dependencies:
     fastfall "^1.5.0"
@@ -3335,11 +3215,7 @@ strip-bom@^4.0.0:
 
 strip-json-comments@^3.1.1:
   version "3.1.1"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
-=======
   resolved "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
->>>>>>> main:backend/yarn.lock
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
 strip-json-comments@~2.0.1:
@@ -3689,11 +3565,7 @@ xdg-basedir@^4.0.0:
 
 xtend@^4.0.0, xtend@^4.0.2:
   version "4.0.2"
-<<<<<<< HEAD:Backend/yarn.lock
-  resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
-=======
   resolved "https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
->>>>>>> main:backend/yarn.lock
   integrity sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
 
 y18n@^4.0.0:
