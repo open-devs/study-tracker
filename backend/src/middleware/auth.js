@@ -9,21 +9,23 @@ const fp = require("fastify-plugin")
 module.exports = fp(async function (fastify, opts) {
   fastify.addHook("onRequest", async (req, res) => {
     try {
-      if (req.url && (req.url.includes("auth") || req.url.includes("health")))
-        return
-      if (req.headers.authorization.split(' ')[1] !== 'null') {
-        await req.jwtVerify();
+      if (req.url && req.url.includes("api") && !(req.url.includes("auth") || req.url.includes("health"))) {
+        if (req.headers.authorization.split(' ')[1] !== 'null') {
+          await req.jwtVerify()
+        } else {
+          const {
+            output: { statusCode, payload },
+          } = boom.unauthorized(`No Authorization token provided`)
+          return res.code(statusCode).send(payload)
+        }
       } else {
-        const {
-          output: { statusCode, payload },
-        } = boom.unauthorized(`No Authorization token provided`)
-        return res.code(statusCode).send(payload)
+        return
       }
     } catch (err) {
       const {
-          output: { statusCode, payload },
-        } = boom.unauthorized(`Authorization token invalid`)
-        return res.code(statusCode).send(payload)
+        output: { statusCode, payload },
+      } = boom.unauthorized(`Authorization token invalid`)
+      return res.code(statusCode).send(payload)
     }
   })
 })

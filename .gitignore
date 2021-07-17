@@ -58,3 +58,6 @@ profile*
 secret/
 .env
 .env.*
+
+# build
+dist
