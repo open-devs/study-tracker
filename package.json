@@ -9,8 +9,9 @@
     "url": "https://opendevs.in"
   },
   "scripts": {
-    "frontend": "cd frontend && yarn start",
-    "backend": "cd backend && yarn start",
+    "fe": "cd frontend && yarn start",
+    "be": "cd backend && yarn start",
+    "dep": "cd frontend && echo 'FRONTEND' && yarn && cd ../backend && echo 'BACKEND' && yarn",
     "commit": "git add . && git cz"
   },
   "license": "BSD",
