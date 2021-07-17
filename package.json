@@ -13,6 +13,7 @@
     "fe-build": "cd frontend && yarn build && mv dist ../backend/dist",
     "be": "cd backend && yarn start",
     "dep": "cd frontend && echo 'FRONTEND' && yarn && cd ../backend && echo 'BACKEND' && yarn",
+    "deploy": "yarn fe-build && yarn be",
     "commit": "git add . && git cz"
   },
   "license": "BSD",
