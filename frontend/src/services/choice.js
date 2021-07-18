@@ -19,6 +19,14 @@ const ChoiceService = Object.freeze({
     }
   },
 
+  patch: async (data) => {
+    try {
+      return await http.patch(`/choice/${data.id}`, data, util.getHeader())
+    } catch (error) {
+      return ErrorService.onError(error)
+    }
+  },
+
 })
 
 export default ChoiceService

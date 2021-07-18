@@ -1,12 +1,15 @@
 <template>
   <div>
     <div id="dashboard-container" class="container-fluid p-5">
-      <div v-for="date in datesArray" :key="date">
-        <span class="badge bg-dark">{{ date }}</span>
-        <HistoryTable
-          :data="selectedSubject.filter((data) => data.createdAt === date)"
-        />
+      <div v-if="historyData.length">
+        <div v-for="data in historyData" :key="data.date">
+          <span class="badge bg-dark">{{ data.date }}</span>
+          <HistoryTable
+            :data="data.choices"
+          />
+        </div>
       </div>
+      <h2 v-else>No history data available Yet!</h2>
     </div>
     <nav
       class="
@@ -32,8 +35,10 @@
 </template>
 
 <script>
+import { computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import HistoryTable from "../components/HistoryTable.vue";
-import { ref } from "vue";
+import util from '../common/util'
 
 export default {
   name: "History",
@@ -41,35 +46,14 @@ export default {
     HistoryTable,
   },
   setup() {
-    const datesArray = ref(["16/07/2021", "15/07/2021"]);
-    const selectedSubject = ref([
-      {
-        createdAt: "16/07/2021",
-        subject: "JavaScript",
-        goal: "2 Hrs",
-        elapsed: "1 Hr",
-      },
-      {
-        createdAt: "16/07/2021",
-        subject: "Typescript",
-        goal: "2 Hrs",
-        elapsed: "1 Hr",
-      },
-      {
-        createdAt: "15/07/2021",
-        subject: "DSA",
-        goal: "1 Hrs",
-        elapsed: "0 Hr",
-      },
-      {
-        createdAt: "15/07/2021",
-        subject: "Java",
-        goal: "2 Hrs",
-        elapsed: "1 Hr",
-      },
-    ]);
+    const store = useStore();
+    const historyData = computed(() => store.getters["choices/getHistory"]);
 
-    return { selectedSubject, datesArray };
+    onMounted(() => {
+      store.dispatch("choices/getHistory", { start: util.getDateNow(), end: util.getSevenDaysAgo() });
+    });
+
+    return { historyData };
   },
 };
 </script>

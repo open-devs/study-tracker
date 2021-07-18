@@ -123,6 +123,7 @@ export default {
       $event.preventDefault();
       const newArr = selectedVal.value.map(el => ({ ...el, goal: +el.goal.split(":")[0] * 60 + +el.goal.split(":")[1] }));
       store.dispatch("choices/save", newArr);
+      selectedVal.value = []
     };
 
     return {

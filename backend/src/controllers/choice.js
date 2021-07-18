@@ -5,6 +5,7 @@ const boom = require("@hapi/boom")
 
 // Get Data Models
 const { Choice, Subject } = require("../models")
+const { sendBoomError } = require("../utils")
 
 const getMaxStopTime = (createdAt, goal) => {
   const maxStop = new Date(createdAt)
@@ -52,14 +53,19 @@ const groupChoicesOnDate = (choices) => {
 // Get all choices of user for a given day.
 const getAll = async (req, res) => {
   try {
-    const { start } = req.query
+    const { start, end } = req.query
     const { _id: userId } = req.user
     const $gte = new Date(start).toISOString()
+    const createdAt = {
+      $gte
+    }
+    if (end) {
+      const $lte = new Date(end).toISOString()
+      createdAt.$lte = $lte
+    }
     const choices = await Choice.find({
       user: userId,
-      createdAt: {
-        $gte,
-      },
+      createdAt,
     }, { user: 0, __v: 0 }).populate("subject")
     const res = choices
       .map((x) => x.toObject())
@@ -80,7 +86,7 @@ const add = async (req, res) => {
     const response = []
     for (const { subject, goal } of req.body) {
       const subjectName = await Subject.find({ title: subject })
-      if (subject.length) {
+      if (subjectName.length) {
         const choice = new Choice({
           subject: subjectName[0]._id,
           user: userId,
@@ -105,11 +111,11 @@ const updateLog = async (req, res) => {
     const { eventType } = req.body
     const choice = await Choice.findById(id)
     if (choice == null) {
-      throw new Error("Choice with given id not found")
+      return sendBoomError(res, boom.notFound('Choice with given id not found'))
     }
     const choiceUserId = choice.user.toString() // ObjectId to string
     if (choiceUserId !== userId) {
-      throw new Error("This choice does not belong to you.")
+      return sendBoomError(res, boom.unauthorized('This choice does not belong to you'))
     }
     /**
      * Make sure that the choice hasn't expired, i.e. choice createdAt + goal time should be
@@ -117,9 +123,7 @@ const updateLog = async (req, res) => {
      */
     const maxStopTime = getMaxStopTime(choice.createdAt, choice.goal)
     if (maxStopTime.valueOf() < new Date().valueOf()) {
-      throw new Error(
-        "Choice has expired. Cannot start or stop the timer now."
-      )
+      return sendBoomError(res, boom.badRequest('Choice has expired. Cannot start or stop the timer now'))
     }
     const prevLogs = choice.log
     if (eventType === "start") {
@@ -130,9 +134,7 @@ const updateLog = async (req, res) => {
         prevLogs.length > 0 &&
         prevLogs[prevLogs.length - 1].stop == null
       ) {
-        throw new Error(
-          `Timer must be stopped first beforing starting again.`
-        )
+        return sendBoomError(res, boom.badRequest('Timer must be stopped first before starting again'))
       }
       const newLogs = [
         ...prevLogs,
@@ -148,15 +150,13 @@ const updateLog = async (req, res) => {
         prevLogs.length === 0 ||
         prevLogs[prevLogs.length - 1].stop != null
       ) {
-        throw new Error(
-          `'stop' event must have a corresponding 'start' event`
-        )
+        return sendBoomError(res, boom.badRequest('You must start the timer before stopping it!'))
       }
       prevLogs[prevLogs.length - 1].stop = new Date().valueOf()
       await choice.update({ $set: { log: prevLogs } })
       return { ...choice.toJSON(), log: prevLogs }
     }
-    throw new Error("Unknown event type.")
+    return sendBoomError(res, boom.badRequest('Unknown event type'))
   } catch (err) {
     throw boom.boomify(err)
   }

@@ -2,14 +2,11 @@
   <div class="col-md-6">
     <h2>Plan for Today:</h2>
     <table class="table table-hover table-responsive">
-      <caption>
-        You can add more subjects in the plan!
-      </caption>
       <thead class="table-dark">
         <tr>
           <th scope="col">Subject</th>
           <th scope="col">Goal</th>
-          <th scope="col">Elapsed Hour</th>
+          <th scope="col">Elapsed</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -17,10 +14,10 @@
         <tr v-for="item in subjectsSaved" :key="item.subject">
           <td>{{ item.subject.title }}</td>
           <td>{{ util.convertMinsToHrsMins(item.goal) }}</td>
-          <td>{{ item.elapsed }}</td>
+          <td>{{ util.convertMinsToHrsMins(item.elapsed / 60000) }}</td>
           <td>
             <button
-              @click="startTimer(item)"
+              @click="logEvent(item._id, 'start')"
               type="button"
               class="btn btn-success btn-sm"
             >
@@ -28,7 +25,7 @@
             </button>
             |
             <button
-              @click="stopTimer(item)"
+              @click="logEvent(item._id, 'stop')"
               type="button"
               class="btn btn-danger btn-sm"
             >
@@ -45,6 +42,7 @@
 import { computed } from "vue";
 import { useStore } from 'vuex'
 import util from '../common/util'
+import choice from '../services/choice'
 
 export default {
   name: "SubjectTable",
@@ -52,15 +50,19 @@ export default {
     const store = useStore();
     const subjectsSaved = computed(() => store.getters["choices/getChoicesSaved"]);
 
-    const startTimer = (item) => {
-      // logic to call API call to startTimer
-      console.log("startTimer", item);
+    const logEvent = async (id, eventType) => {
+      try {
+        const data = {
+          id,
+          eventType
+        }
+        await choice.patch(data)
+        await store.dispatch('getChoicesSaved', { start: util.getDateNow() })
+      } catch (error) {
+        console.error(error);
+      }
     };
-    const stopTimer = (item) => {
-      // logic to call API call to stopTimer
-      console.log("stopTimer", item);
-    };
-    return { subjectsSaved, startTimer, stopTimer, util };
+    return { subjectsSaved, logEvent, util };
   },
 };
 </script>

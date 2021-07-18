@@ -30,11 +30,12 @@
 </template>
 
 <script>
-import { onBeforeMount, computed } from 'vue'
+import { onMounted, computed } from 'vue'
 import SubjectSelection from "../components/SubjectSelection.vue";
 import SubjectTable from "../components/SubjectTable.vue";
 import router from "../router";
 import { useStore } from "vuex";
+import util from '../common/util';
 
 export default {
   name: "Dashboard",
@@ -50,9 +51,8 @@ export default {
       router.push("/");
     };
 
-    onBeforeMount(() => {
-      const today = new Date()
-      store.dispatch("choices/getChoicesSaved", { start: new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`) });
+    onMounted(() => {
+      store.dispatch("choices/getChoicesSaved", { start: util.getDateNow() });
     });
 
     return { logout, subjectsSaved };

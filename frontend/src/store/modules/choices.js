@@ -1,5 +1,6 @@
 import choice from '../../services/choice'
 import ErrorService from '../../services/error'
+import util from '../../common/util'
 
 // initial state
 const state = {
@@ -37,25 +38,26 @@ const actions = {
     try {
       if (data.length) {
         await choice.save(data)
-        await dispatch('getChoicesSaved')
+        await dispatch('getChoicesSaved', { start: util.getDateNow() })
       }
     } catch (error) {
       ErrorService.onError(error)
     }
   },
 
-  // getHistory() {
-  //   try {
-  //     const response = await subject.get()
-  //     if (response && response.data) {
-  //       let data = response.data
-  //       data = data.map(el => el.title)
-  //       return commit('set', { key: 'items', items: data })
-  //     }
-  //   } catch (error) {
-  //     ErrorService.onError(error)
-  //   }
-  // }
+  async getHistory({ commit }, data) {
+    try {
+      const response = await choice.get(data)
+      if (response && response.data.length) {
+        let data = response.data
+        if (data) {
+          return commit('set', { key: 'history', items: data })
+        }
+      }
+    } catch (error) {
+      ErrorService.onError(error)
+    }
+  }
 }
 
 // mutations

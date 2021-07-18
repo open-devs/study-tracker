@@ -3,6 +3,7 @@
 // External Dependancies
 const boom = require("@hapi/boom")
 const fp = require("fastify-plugin")
+const { sendBoomError } = require('../utils')
 
 // This plugins adds cookie ability to fastify
 
@@ -17,19 +18,13 @@ module.exports = fp(async function (fastify, opts) {
         if (req.headers.authorization.split(" ")[1] !== "null") {
           await req.jwtVerify()
         } else {
-          const {
-            output: { statusCode, payload },
-          } = boom.unauthorized(`No Authorization token provided`)
-          return res.code(statusCode).send(payload)
+          return sendBoomError(res, boom.unauthorized(`No Authorization token provided`))
         }
       } else {
         return
       }
     } catch (err) {
-      const {
-        output: { statusCode, payload },
-      } = boom.unauthorized(`Authorization token invalid`)
-      return res.code(statusCode).send(payload)
+      return sendBoomError(res, boom.unauthorized(`Authorization token invalid`))
     }
   })
 })
