@@ -13,12 +13,12 @@ const schema = new Schema(
       ref: "User",
     },
     goal: {
-      type: Number, // 120
+      type: Number,
       required: [true, "Goal is required"],
     },
     log: {
       type: [Object],
-      default: [], // [ { start: number, stop: number | null } ]
+      default: [],
     },
   },
   {

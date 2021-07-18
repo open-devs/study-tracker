@@ -4,7 +4,7 @@
 const boom = require("@hapi/boom")
 
 // Get Data Models
-const { Choice } = require("../models")
+const { Choice, Subject } = require("../models")
 
 const getMaxStopTime = (createdAt, goal) => {
   const maxStop = new Date(createdAt)
@@ -52,16 +52,13 @@ const groupChoicesOnDate = (choices) => {
 // Get all choices of user for a given day.
 const getAll = async (req, res) => {
   try {
-    const { start, end } = req.query
+    const { start } = req.query
     const { _id: userId } = req.user
-    // Range is [start, end)
     const $gte = new Date(start).toISOString()
-    const $lte = new Date(new Date(end).valueOf() - 1).toISOString()
     const choices = await Choice.find({
       user: userId,
       createdAt: {
         $gte,
-        $lte,
       },
     }).populate("subject")
     const res = choices
@@ -82,13 +79,17 @@ const add = async (req, res) => {
     const { _id: userId } = req.user
     const response = []
     for (const { subject, goal } of req.body) {
-      const choice = new Choice({
-        subject,
-        user: userId,
-        goal,
-        log: [],
-      })
-      response.push(await choice.save())
+      const subjectName = await Subject.find({ title: subject })
+      if (subject.length) {
+        const choice = new Choice({
+          subject: subjectName[0]._id,
+          user: userId,
+          goal,
+          log: [],
+        })
+        await choice.save()
+        response.push(true)
+      }
     }
     return response
   } catch (err) {

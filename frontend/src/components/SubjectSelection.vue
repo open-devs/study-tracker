@@ -27,20 +27,20 @@
               goal-list
             "
             v-for="value of selectedVal"
-            :key="value.title"
+            :key="value.subject"
           >
             <span
-              >{{ value.title }}
+              >{{ value.subject }}
               <small class="text-muted">
                 for {{ displayHoursMins(value.goal) || `0 mins` }}</small
               ></span
             >
             <input
-              :class="`input-${value.title}`"
+              :class="`input-${value.subject}`"
               type="time"
               v-model="value.goal"
               max="10:00:00"
-              :aria-label="`Set Goal for ${value.title}`"
+              :aria-label="`Set Goal for ${value.subject}`"
             />
           </li>
         </ul>
@@ -107,7 +107,7 @@ export default {
       value.forEach((el) => el.toLowerCase());
       store.dispatch("subjects/save", value);
       selectedVal.value = value.map((el) => ({
-        title: el,
+        subject: el,
         goal: `00:00`,
       }));
     };
@@ -122,8 +122,7 @@ export default {
     const submitData = ($event) => {
       $event.preventDefault();
       const newArr = selectedVal.value.map(el => ({ ...el, goal: +el.goal.split(":")[0] * 60 + +el.goal.split(":")[1] }));
-      console.log(newArr);
-      // store.dispatch("choices/save", newArr);
+      store.dispatch("choices/save", newArr);
     };
 
     return {

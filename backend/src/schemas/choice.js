@@ -2,10 +2,9 @@ module.exports = {
   getAll: {
     querystring: {
       type: "object",
-      required: ["start", "end"],
+      required: ["start"],
       properties: {
         start: { type: "string", length: 10 },
-        end: { type: "string", length: 10 },
       },
     },
     response: {
@@ -16,11 +15,15 @@ module.exports = {
   },
   add: {
     body: {
-      type: "object",
-      required: ["subject", "goal"],
-      properties: {
-        subject: { type: "string", minLength: 20, maxLength: 30 },
-        goal: { type: "number", minimum: 1, maximum: 1440 },
+      type: "array",
+      uniqueItems: true,
+      item: {
+        type: "object",
+        required: ["subject", "goal"],
+        properties: {
+          subject: { type: "string", minLength: 20, maxLength: 30 },
+          goal: { type: "number", minimum: 1, maximum: 1440 },
+        }
       },
     },
     response: {
