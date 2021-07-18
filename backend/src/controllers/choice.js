@@ -80,14 +80,17 @@ const getAll = async (req, res) => {
 const add = async (req, res) => {
   try {
     const { _id: userId } = req.user
-    const { subject, goal } = req.body
-    const choice = new Choice({
-      subject,
-      user: userId,
-      goal,
-      log: [],
-    })
-    return choice.save()
+    const response = []
+    for (const { subject, goal } of req.body) {
+      const choice = new Choice({
+        subject,
+        user: userId,
+        goal,
+        log: [],
+      })
+      response.push(await choice.save())
+    }
+    return response
   } catch (err) {
     throw boom.boomify(err)
   }
@@ -112,8 +115,6 @@ const updateLog = async (req, res) => {
      * less than equals to current time
      */
     const maxStopTime = getMaxStopTime(choice.createdAt, choice.goal)
-    console.log(maxStopTime.toISOString())
-    console.log(new Date().toISOString())
     if (maxStopTime.valueOf() < new Date().valueOf()) {
       throw new Error(
         "Choice has expired. Cannot start or stop the timer now."

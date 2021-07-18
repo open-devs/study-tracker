@@ -59,8 +59,7 @@ const signup = async (req, res) => {
       const {
         output: { statusCode, payload },
       } = boom.unauthorized(
-        `Account with following credentials: ${
-          existingUser[0].email || existingUser[0].username || ""
+        `Account with following credentials: ${existingUser[0].email || existingUser[0].username || ""
         } already exists`
       )
       return res.code(statusCode).send(payload)
@@ -75,7 +74,7 @@ const signup = async (req, res) => {
     const newUser = new User({
       email,
       password: passwordHash,
-      name: !name ? email.split("@")[0] ?? "test-name" : name,
+      name: name || email.split("@")[0],
       username,
     })
     await newUser.save()

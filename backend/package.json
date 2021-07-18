@@ -3,11 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "tap \"test/**/*.test.js\"",
     "lint": "prettier --write .",
     "start": "nodemon server"
   },
