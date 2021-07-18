@@ -33,7 +33,9 @@ const update = async (req, res) => {
     const id = req.params.id
     const user = req.body
     const { ...updateData } = user
-    const update = await User.findByIdAndUpdate(id, updateData, { new: true })
+    const update = await User.findByIdAndUpdate(id, updateData, {
+      new: true,
+    })
     return update
   } catch (err) {
     throw boom.boomify(err)
