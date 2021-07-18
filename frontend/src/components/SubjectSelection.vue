@@ -13,7 +13,7 @@
     />
     <form class="row align-items-center g-md-5 py-5">
       <div class="col-md-12 mx-auto">
-        <h2>Selected subjects for today:</h2>
+        <h2 v-if="selectedVal.length">Selected subjects for today:</h2>
         <ul class="list-group">
           {{
             !selectedVal.length ? `Nothing Selected Yet` : null
@@ -55,6 +55,7 @@
           type="submit"
           class="btn btn-primary"
           data-bs-toggle="submit"
+          v-if="selectedVal.length"
           :disabled="totalTime === 0"
           @click="submitData"
         >
@@ -120,7 +121,9 @@ export default {
 
     const submitData = ($event) => {
       $event.preventDefault();
-      console.log(selectedVal.value);
+      const newArr = selectedVal.value.map(el => ({ ...el, goal: +el.goal.split(":")[0] * 60 + +el.goal.split(":")[1] }));
+      console.log(newArr);
+      // store.dispatch("choices/save", newArr);
     };
 
     return {

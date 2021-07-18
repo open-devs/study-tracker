@@ -24,4 +24,13 @@ const router = createRouter({
   routes
 })
 
+
+router.beforeEach((to, from, next) => {
+  if (localStorage.getItem('bearer') || to.fullPath === '/') {
+    next()
+  } else {
+    next('/')
+  }
+})
+
 export default router

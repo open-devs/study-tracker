@@ -10,7 +10,7 @@
             type="text"
             class="form-control"
             id="username"
-            @change="validation('username')"
+            @change="validation(loginObj, loginObjErr, 'username')"
             v-model="loginObj.username"
             placeholder="opendevs"
           />
@@ -24,7 +24,7 @@
             type="password"
             class="form-control"
             id="password"
-            @change="validation('password')"
+            @change="validation(loginObj, loginObjErr, 'password')"
             v-model="loginObj.password"
             placeholder="Password"
           />
@@ -79,13 +79,13 @@
                   type="text"
                   class="form-control"
                   id="signupName"
-                  @change="validation('signupName')"
-                  v-model="singupObj.name"
+                  @change="validation(signupObj, signupObjErr, 'name')"
+                  v-model="signupObj.name"
                   placeholder="opendevs"
                 />
                 <label for="signupName">Name</label>
-                <small class="text-danger" v-if="singupObjErr.name.length">{{
-                  singupObjErr.name
+                <small class="text-danger" v-if="signupObjErr.name.length">{{
+                  signupObjErr.name
                 }}</small>
               </div>
               <div class="form-floating mb-3">
@@ -93,15 +93,15 @@
                   type="text"
                   class="form-control"
                   id="signupUsername"
-                  @change="validation('signupUsername')"
-                  v-model="singupObj.username"
+                  @change="validation(signupObj, signupObjErr, 'username')"
+                  v-model="signupObj.username"
                   placeholder="opendevs"
                 />
                 <label for="signupUsername">Username</label>
                 <small
                   class="text-danger"
-                  v-if="singupObjErr.username.length"
-                  >{{ singupObjErr.username }}</small
+                  v-if="signupObjErr.username.length"
+                  >{{ signupObjErr.username }}</small
                 >
               </div>
               <div class="form-floating mb-3">
@@ -109,13 +109,13 @@
                   type="email"
                   class="form-control"
                   id="signupEmail"
-                  @change="validation('signupEmail')"
-                  v-model="singupObj.email"
+                  @change="validation(signupObj, signupObjErr, 'email')"
+                  v-model="signupObj.email"
                   placeholder="name@example.com"
                 />
                 <label for="signupEmail">Email address</label>
-                <small class="text-danger" v-if="singupObjErr.email.length">{{
-                  singupObjErr.email
+                <small class="text-danger" v-if="signupObjErr.email.length">{{
+                  signupObjErr.email
                 }}</small>
               </div>
               <div class="form-floating mb-3">
@@ -123,15 +123,15 @@
                   type="password"
                   class="form-control"
                   id="signupPassword"
-                  @change="validation('signupPassword')"
-                  v-model="singupObj.password"
+                  @change="validation(signupObj, signupObjErr, 'password')"
+                  v-model="signupObj.password"
                   placeholder="Password"
                 />
                 <label for="signupPassword">Password</label>
                 <small
                   class="text-danger"
-                  v-if="singupObjErr.password.length"
-                  >{{ singupObjErr.password }}</small
+                  v-if="signupObjErr.password.length"
+                  >{{ signupObjErr.password }}</small
                 >
               </div>
               <button class="w-100 btn btn-lg btn-success" type="submit">
@@ -154,6 +154,24 @@ import router from "../router";
 import isAlpha from "validator/es/lib/isAlpha";
 import isEmail from "validator/es/lib/isEmail";
 
+const validationObj = {
+  name: (value) =>
+    value.length < 4 || value.length > 30
+      ? "Name length should be in between 4 and 30"
+      : isAlpha(value)
+      ? "Please Enter a valid Name"
+      : "",
+  username: (value) =>
+    value.length < 4 || value.length > 12
+      ? "Username must be between 4 and 12 characters"
+      : "",
+  password: (value) =>
+    value.length < 8 || value.length > 25
+      ? "Password must be between 8 and 25 characters"
+      : "",
+  email: (value) => (isEmail(value.email) ? "Please Enter a valid Email" : ""),
+};
+
 export default {
   name: "Auth",
 
@@ -167,13 +185,13 @@ export default {
       username: "",
       password: "",
     });
-    const singupObj = ref({
+    const signupObj = ref({
       name: "",
       username: "",
       email: "",
       password: "",
     });
-    const singupObjErr = ref({
+    const signupObjErr = ref({
       name: "",
       username: "",
       email: "",
@@ -189,105 +207,45 @@ export default {
 
     const onSignin = async () => {
       const response = await AuthService.login(loginObj.value);
-      response?.data?.token &&
+      if (response?.data?.token) {
         localStorage.setItem("bearer", response.data.token);
-      router.push("/dashboard");
-      loginObj.value.username = "";
-      loginObj.value.password = "";
+        router.push("/dashboard");
+        loginObj.value.username = "";
+        loginObj.value.password = "";
+      }
     };
 
     const onSignup = async () => {
-      await AuthService.signup(singupObj.value);
-      modalClose.value.click();
-      AlertService.displayAlert(
-        "Successful!",
-        `Signup successful, login to proceed!`,
-        "success"
-      );
-      singupObj.value.name = "";
-      singupObj.value.username = "";
-      singupObj.value.email = "";
-      singupObj.value.password = "";
+      const response = await AuthService.signup(signupObj.value);
+      if (response.data) {
+        modalClose.value.click();
+        AlertService.displayAlert(
+          "Successful!",
+          `Signup successful, login to proceed!`,
+          "success"
+        );
+        signupObj.value.name = "";
+        signupObj.value.username = "";
+        signupObj.value.email = "";
+        signupObj.value.password = "";
+      }
     };
 
-    const validation = (fieldName) => {
-      if (fieldName === "username") {
-        if (
-          loginObj.value.username.length < 4 ||
-          loginObj.value.username.length > 12
-        ) {
-          loginObjErr.value.username =
-            "Username length should be in between 4 and 12";
-        } else {
-          loginObjErr.value.username = "";
-        }
-      }
-      if (fieldName === "password") {
-        if (
-          loginObj.value.password.length < 8 ||
-          loginObj.value.password.length > 25
-        ) {
-          loginObjErr.value.password =
-            "Password length should be in between 8 and 25";
-        } else {
-          loginObjErr.value.password = "";
-        }
-      }
-      if (fieldName === "signupName") {
-        if (
-          singupObj.value.name.length < 4 ||
-          singupObj.value.name.length > 30
-        ) {
-          singupObjErr.value.name = "Name length should be in between 4 and 30";
-        } else {
-          singupObjErr.value.name = "";
-        }
-        if (isAlpha(singupObj.value.name)) {
-          singupObjErr.value.name = "Please Enter a valid Name";
-        } else {
-          singupObjErr.value.name = "";
-        }
-      }
-      if (fieldName === "signupPassword") {
-        if (
-          singupObj.value.password.length < 8 ||
-          singupObj.value.password.length > 25
-        ) {
-          singupObjErr.value.password =
-            "Password length should be in between 8 and 25";
-        } else {
-          singupObjErr.value.password = "";
-        }
-      }
-      if (fieldName === "signupEmail") {
-        if (!isEmail(singupObj.value.email)) {
-          singupObjErr.value.email = "Please Enter a valid Email";
-        } else {
-          singupObjErr.value.email = "";
-        }
-      }
-      if (fieldName === "signupUsername") {
-        if (
-          singupObj.value.username.length < 4 ||
-          singupObj.value.username.length > 12
-        ) {
-          singupObjErr.value.username =
-            "Username length should be in between 4 and 12";
-        } else {
-          singupObjErr.value.username = "";
-        }
-      }
+    const validation = (obj, errorObj, fieldName) => {
+      errorObj[fieldName] = validationObj[fieldName](
+        obj[fieldName]
+      );
     };
 
     return {
       token,
-      singupObj,
+      signupObj,
       loginObj,
       onSignin,
       onSignup,
       modalClose,
       loginObjErr,
-      singupObjErr,
+      signupObjErr,
       validation,
     };
   },
