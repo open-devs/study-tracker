@@ -1,6 +1,11 @@
 <template>
   <div>
     <div id="dashboard-container" class="container-fluid p-5">
+      <div class="d-flex align-items-end flex-column">
+        <button class="btn btn-sm btn-warning mt-auto p-2" @click="logout">
+          Logout
+        </button>
+      </div>
       <div class="row g-md-5 py-5">
         <SubjectSelection />
         <SubjectTable />
@@ -29,12 +34,20 @@
 <script>
 import SubjectSelection from "../components/SubjectSelection.vue";
 import SubjectTable from "../components/SubjectTable.vue";
+import router from "../router";
 
 export default {
   name: "Dashboard",
   components: {
     SubjectSelection,
     SubjectTable,
+  },
+  setup() {
+    const logout = () => {
+      localStorage.clear("bearer");
+      router.push("/");
+    };
+    return { logout };
   },
 };
 </script>

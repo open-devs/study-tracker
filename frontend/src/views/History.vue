@@ -1,7 +1,12 @@
 <template>
   <div>
     <div id="dashboard-container" class="container-fluid p-5">
-      <div class="row align-items-center g-md-5 py-5">Hi from History!</div>
+      <div v-for="date in datesArray" :key="date">
+        <span class="badge bg-dark">{{ date }}</span>
+        <HistoryTable
+          :data="selectedSubject.filter((data) => data.createdAt === date)"
+        />
+      </div>
     </div>
     <nav
       class="
@@ -24,7 +29,44 @@
 </template>
 
 <script>
+import HistoryTable from "../components/HistoryTable.vue";
+import { ref } from "vue";
+
 export default {
   name: "History",
+  components: {
+    HistoryTable,
+  },
+  setup() {
+    const datesArray = ref(["16/07/2021", "15/07/2021"]);
+    const selectedSubject = ref([
+      {
+        createdAt: "16/07/2021",
+        subject: "JavaScript",
+        goal: "2 Hrs",
+        elapsed: "1 Hr",
+      },
+      {
+        createdAt: "16/07/2021",
+        subject: "Typescript",
+        goal: "2 Hrs",
+        elapsed: "1 Hr",
+      },
+      {
+        createdAt: "15/07/2021",
+        subject: "DSA",
+        goal: "1 Hrs",
+        elapsed: "0 Hr",
+      },
+      {
+        createdAt: "15/07/2021",
+        subject: "Java",
+        goal: "2 Hrs",
+        elapsed: "1 Hr",
+      },
+    ]);
+
+    return { selectedSubject, datesArray };
+  },
 };
 </script>

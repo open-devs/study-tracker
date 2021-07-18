@@ -33,7 +33,11 @@
             loginObjErr.password
           }}</small>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">
+        <button
+          class="w-100 btn btn-lg btn-primary"
+          type="submit"
+          :disabled="loginFormInvalid"
+        >
           Sign In
         </button>
         <hr class="my-4" />
@@ -134,7 +138,11 @@
                   >{{ signupObjErr.password }}</small
                 >
               </div>
-              <button class="w-100 btn btn-lg btn-success" type="submit">
+              <button
+                class="w-100 btn btn-lg btn-success"
+                type="submit"
+                :disabled="signupFormInvalid"
+              >
                 Sign Up
               </button>
               <!--NOTE: ToDo: Add button validation -->
@@ -147,7 +155,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import AuthService from "../services/auth";
 import AlertService from "../services/alert";
 import router from "../router";
@@ -169,7 +177,7 @@ const validationObj = {
     value.length < 8 || value.length > 25
       ? "Password must be between 8 and 25 characters"
       : "",
-  email: (value) => (isEmail(value.email) ? "Please Enter a valid Email" : ""),
+  email: (value) => (isEmail(value) ? "Please Enter a valid Email" : ""),
 };
 
 export default {
@@ -198,6 +206,24 @@ export default {
       password: "",
     });
     const modalClose = ref(null);
+    const loginFormInvalid = computed(
+      () =>
+        Object.keys(loginObj.value).some(
+          (el) => loginObj.value[el].length === 0
+        ) ||
+        Object.keys(loginObjErr.value).some(
+          (el) => loginObjErr.value[el].length
+        )
+    );
+    const signupFormInvalid = computed(
+      () =>
+        Object.keys(signupObj.value).some(
+          (el) => signupObj.value[el].length === 0
+        ) ||
+        Object.keys(signupObjErr.value).some(
+          (el) => signupObjErr.value[el].length
+        )
+    );
 
     onMounted(() => {
       if (localStorage.getItem("bearer")) {
@@ -232,9 +258,7 @@ export default {
     };
 
     const validation = (obj, errorObj, fieldName) => {
-      errorObj[fieldName] = validationObj[fieldName](
-        obj[fieldName]
-      );
+      errorObj[fieldName] = validationObj[fieldName](obj[fieldName]);
     };
 
     return {
@@ -247,6 +271,8 @@ export default {
       loginObjErr,
       signupObjErr,
       validation,
+      loginFormInvalid,
+      signupFormInvalid,
     };
   },
 };
