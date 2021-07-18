@@ -60,7 +60,7 @@ const getAll = async (req, res) => {
       createdAt: {
         $gte,
       },
-    }).populate("subject")
+    }, { user: 0, __v: 0 }).populate("subject")
     const res = choices
       .map((x) => x.toObject())
       .map((x) => ({

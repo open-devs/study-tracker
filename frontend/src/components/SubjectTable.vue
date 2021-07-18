@@ -8,15 +8,15 @@
       <thead class="table-dark">
         <tr>
           <th scope="col">Subject</th>
-          <th scope="col">Planned Hour</th>
+          <th scope="col">Goal</th>
           <th scope="col">Elapsed Hour</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in selectedSubject" :key="item.subject">
-          <td>{{ item.subject }}</td>
-          <td>{{ item.plannedHour }}</td>
+        <tr v-for="item in subjectsSaved" :key="item.subject">
+          <td>{{ item.subject.title }}</td>
+          <td>{{ util.convertMinsToHrsMins(item.goal) }}</td>
           <td>{{ item.elapsed }}</td>
           <td>
             <button
@@ -42,29 +42,15 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed } from "vue";
+import { useStore } from 'vuex'
+import util from '../common/util'
 
 export default {
   name: "SubjectTable",
   setup() {
-    // Load subjects on onMount
-    const selectedSubject = ref([
-      {
-        subject: "JavaScript",
-        plannedHour: "2 Hrs",
-        elapsed: "1 Hr",
-      },
-      {
-        subject: "DSA",
-        plannedHour: "1 Hrs",
-        elapsed: "0 Hr",
-      },
-      {
-        subject: "ReactJS",
-        plannedHour: "2 Hrs",
-        elapsed: "0 Hr",
-      },
-    ]);
+    const store = useStore();
+    const subjectsSaved = computed(() => store.getters["choices/getChoicesSaved"]);
 
     const startTimer = (item) => {
       // logic to call API call to startTimer
@@ -74,7 +60,7 @@ export default {
       // logic to call API call to stopTimer
       console.log("stopTimer", item);
     };
-    return { selectedSubject, startTimer, stopTimer };
+    return { subjectsSaved, startTimer, stopTimer, util };
   },
 };
 </script>

@@ -3,16 +3,12 @@ import ErrorService from '../../services/error'
 
 // initial state
 const state = {
-  choicesSelected: [],
   choicesSaved: [],
   history: []
 }
 
 // getters
 const getters = {
-  getChoicesSelected: (state) => {
-    return state.choicesSelected
-  },
   getChoicesSaved: (state) => {
     return state.choicesSaved
   },
@@ -23,14 +19,14 @@ const getters = {
 
 // actions
 const actions = {
-  async getChoicesSaved({ commit }) {
+  async getChoicesSaved({ commit }, data) {
     try {
-      const today = new Date()
-      const response = await choice.get({ start: new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`) })
-      if (response && response.data) {
-        let data = response.data
-        data = data.map(el => el.title)
-        return commit('set', { key: 'choicesSaved', items: data })
+      const response = await choice.get(data)
+      if (response && response.data.length) {
+        let data = response.data[0].choices
+        if (data) {
+          return commit('set', { key: 'choicesSaved', items: data })
+        }
       }
     } catch (error) {
       ErrorService.onError(error)

@@ -24,6 +24,9 @@
       <router-link to="/history">
         <button class="btn btn-success me-2" type="button">History</button>
       </router-link>
+      <button class="btn btn-sm btn-warning ml-5 p-2 logout-btn" @click="logout">
+        Logout
+      </button>
     </nav>
   </div>
 </template>

@@ -12,3 +12,8 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.logout-btn {
+  position: fixed;
+  right: 20px;
+}

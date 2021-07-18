@@ -1,13 +1,8 @@
 <template>
   <div>
     <div id="dashboard-container" class="container-fluid p-5">
-      <div class="d-flex align-items-end flex-column">
-        <button class="btn btn-sm btn-warning mt-auto p-2" @click="logout">
-          Logout
-        </button>
-      </div>
       <div class="row g-md-5 py-5">
-        <SubjectSelection />
+        <SubjectSelection :class="subjectsSaved.length && 'plan-set'"/>
         <SubjectTable />
       </div>
     </div>
@@ -27,14 +22,19 @@
           History
         </button>
       </router-link>
+      <button class="btn btn-sm btn-warning ml-5 p-2 logout-btn" @click="logout">
+        Logout
+      </button>
     </nav>
   </div>
 </template>
 
 <script>
+import { onBeforeMount, computed } from 'vue'
 import SubjectSelection from "../components/SubjectSelection.vue";
 import SubjectTable from "../components/SubjectTable.vue";
 import router from "../router";
+import { useStore } from "vuex";
 
 export default {
   name: "Dashboard",
@@ -43,11 +43,26 @@ export default {
     SubjectTable,
   },
   setup() {
+    const store = useStore();
+    const subjectsSaved = computed(() => store.getters["choices/getChoicesSaved"]);
     const logout = () => {
       localStorage.clear("bearer");
       router.push("/");
     };
-    return { logout };
+
+    onBeforeMount(() => {
+      const today = new Date()
+      store.dispatch("choices/getChoicesSaved", { start: new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`) });
+    });
+
+    return { logout, subjectsSaved };
   },
 };
 </script>
+
+<style scoped>
+.plan-set {
+  opacity: 0.7;
+  pointer-events: none;
+}
+</style>
