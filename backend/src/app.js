@@ -20,7 +20,7 @@ module.exports = async function (fastify, opts) {
         return
       }
 
-      if (/process.env.PROD_DEPLOYMENT_URL/.test(origin)) {
+      if (new RegExp(process.env.PROD_DEPLOYMENT_URL).test(origin)) {
         corsOptions.origin = true
         cb(null, corsOptions)
         return
