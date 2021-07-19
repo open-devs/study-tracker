@@ -16,6 +16,11 @@ module.exports = async function (fastify, opts) {
         /localhost/.test(origin) ||
         /127.0.0.1/.test(origin)
       ) {
+        cb(null, corsOptions)
+        return
+      }
+
+      if (/process.env.PROD_DEPLOYMENT_URL/.test(origin)) {
         corsOptions.origin = true
         cb(null, corsOptions)
         return
