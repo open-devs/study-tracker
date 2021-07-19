@@ -177,7 +177,7 @@ const validationObj = {
     value.length < 8 || value.length > 25
       ? "Password must be between 8 and 25 characters"
       : "",
-  email: (value) => (isEmail(value) ? "Please Enter a valid Email" : ""),
+  email: (value) => (isEmail(value) ? "" : "Please Enter a valid Email"),
 };
 
 export default {
