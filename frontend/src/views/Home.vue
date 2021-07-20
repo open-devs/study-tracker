@@ -7,7 +7,7 @@
           Study Tracker?
         </h1>
         <p class="col-md-10 fs-4">
-          An app where you can plan your study goals for everyday. Add hours towards each goal, time your hours spent & see your history of last 7 days!
+          An app that helps you plan your study goals for everyday. You can add hours towards each goal, time your hours spent using interactive buttons & see your study history of last 7 days!
         </p>
       </div>
       <div class="col-md-6 px-5">
