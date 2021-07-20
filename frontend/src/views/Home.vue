@@ -7,10 +7,7 @@
           Study Tracker?
         </h1>
         <p class="col-md-10 fs-4">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo,
-          dicta voluptas unde consequatur, odit iste suscipit explicabo in
-          mollitia repudiandae exercitationem. Distinctio labore adipisci
-          voluptas placeat, repellat nemo nam amet.
+          An app where you can plan your study goals for everyday. Add hours towards each goal, time your hours spent & see your history of last 7 days!
         </p>
       </div>
       <div class="col-md-6 px-5">
